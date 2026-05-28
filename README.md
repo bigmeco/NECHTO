@@ -20,7 +20,7 @@
 | Платформа | Файл |
 |---|---|
 | 🐧 Steam Deck / Linux | [Releases →](../../releases/tag/dev) |
-| 🍎 macOS | скоро |
+| 🍎 macOS |  [Releases →](../../releases/tag/dev)  |
 | 🪟 Windows | скоро |
 
 ---
