@@ -26,7 +26,7 @@
 ---
 
 <div align="center">
-  <img src="assets/shared-table.png" width="92%" alt="Общий стол НЕЧТО на экране телевизора">
+  <img src="assets/shared-table.gif" width="92%" alt="Общий стол НЕЧТО на экране телевизора">
   <br>
   <sub><code>:desktopApp</code> · общий стол 1920×1080 — то, что видят все игроки на большом экране. Без секретной информации.</sub>
 </div>
