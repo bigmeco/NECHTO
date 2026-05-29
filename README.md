@@ -26,9 +26,9 @@
 ---
 
 <div align="center">
-  <img src="assets/shared-table.gif" width="92%" alt="Общий стол НЕЧТО на экране телевизора">
+  <img src="assets/shared-table.png" width="92%" alt="Общий стол НЕЧТО на экране телевизора">
   <br>
-  <sub><code>:desktopApp</code> · общий стол 3440×1440 — то, что видят все игроки на большом экране. Без секретной информации.</sub>
+  <sub><code>:desktopApp</code> · общий стол 1920×1080 — то, что видят все игроки на большом экране. Без секретной информации.</sub>
 </div>
 
 ---
@@ -97,7 +97,30 @@
 |:--|:--|
 | 🐧 **Steam Deck / Linux** | [Releases →](https://github.com/bigmeco/NECHTO/releases/tag/dev) |
 | 🍎 **macOS** | [Releases →](https://github.com/bigmeco/NECHTO/releases/tag/dev) |
-| 🪟 **Windows** | [Releases →](https://github.com/bigmeco/NECHTO/releases/tag/dev) |
+| 🪟 **Windows** `.msi` | [Releases →](https://github.com/bigmeco/NECHTO/releases/tag/dev) |
+| 🪟 **Windows** `.zip` | [Releases →](https://github.com/bigmeco/NECHTO/releases/tag/dev) |
+
+---
+
+## Установка · Windows
+<a id="установка-windows"></a>
+
+**Вариант A — установщик `.msi` *(рекомендуется)*:**
+
+1. Скачать `Nechto-*.msi` из Releases.
+2. Запустить — пройти стандартный мастер установки Windows.
+3. Ярлык **Nechto** появится в меню «Пуск».
+
+> Если Windows SmartScreen показывает предупреждение — нажать **«Подробнее» → «Всё равно запустить»**.
+> Приложение не подписано сертификатом издателя (dev-версия).
+
+**Вариант Б — портативный `.zip` *(без установки)*:**
+
+1. Скачать `nechto-windows.zip` из Releases.
+2. Распаковать в любую папку.
+3. Запустить `Nechto.exe` внутри.
+
+Права администратора не нужны, в реестр ничего не пишется.
 
 ---
 
