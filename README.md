@@ -97,7 +97,7 @@
 |:--|:--|
 | 🐧 **Steam Deck / Linux** | [Releases →](https://github.com/bigmeco/NECHTO/releases/tag/dev) |
 | 🍎 **macOS** | [Releases →](https://github.com/bigmeco/NECHTO/releases/tag/dev) |
-| 🪟 **Windows** | <sub>скоро</sub> |
+| 🪟 **Windows** | [Releases →](https://github.com/bigmeco/NECHTO/releases/tag/dev) |
 
 ---
 
