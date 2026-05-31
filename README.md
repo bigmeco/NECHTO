@@ -14,20 +14,6 @@
 
 ---
 
-<!-- IMAGE PROMPT (для assets/style.png):
-Top-down view of a dimly lit table in a dark room. Several smartphones face-down or glowing on the
-table surface, each casting blue-green light upward onto shadowed faces — faces not fully visible,
-just jawlines and hands. In the center: a glowing laptop screen showing a circular ship schematic
-with player nodes. One node is pulsing red. The atmosphere is paranoid and claustrophobic — like
-a cult ritual crossed with a cold war briefing. Color palette: deep black, sickly green, amber,
-arterial red. Flat top-down perspective, cinematic grain, no text.
--->
-<div align="center">
-  <img src="assets/style.png" width="100%" alt="НЕЧТО — живая партия">
-</div>
-
----
-
 ## Что это такое
 <a id="о-игре"></a>
 
@@ -68,7 +54,6 @@ arterial red. Flat top-down perspective, cinematic grain, no text.
 То, что вы делаете — видите только вы. И тот, кому вы это передаёте.
 
 > **Требования:** общая Wi-Fi-сеть. Интернет не нужен. Регистрация не нужна.
-> Телефон: Chrome или Firefox *(Safari не поддерживается)*.
 
 ---
 
@@ -256,10 +241,14 @@ xattr -cr /Applications/Нечто.app
 | Узел | Что нужно |
 |:--|:--|
 | 🖥️ **Хост** | Ноутбук / Steam Deck с Wi-Fi |
-| 📱 **Игроки** | Телефон с **Chrome** или **Firefox** *(Safari не поддерживается)* |
+| 📱 **Игроки** | Телефон с браузером — Chrome или Firefox |
 | 📡 **Сеть** | Общая Wi-Fi — интернет не нужен, только локальная сеть |
 
 ---
+
+<div align="center">
+  <img src="assets/style.png" width="100%" alt="НЕЧТО — ПРОТОКОЛ ЗАРАЖЕНИЯ">
+</div>
 
 <a id="лицензия"></a>
 <div align="center">
