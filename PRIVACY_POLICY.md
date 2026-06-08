@@ -27,4 +27,4 @@ We do not collect or store any data, so there is no user data retained or manage
 This Privacy Policy may be updated from time to time for any reason. We will notify you of any changes to our Privacy Policy by posting the new Privacy Policy here and updating the "Last updated" date above.
 
 ### 6. Contact us
-If you have any questions regarding privacy while using the Application, please contact us via email at: [ВАШ_EMAIL]
+If you have any questions regarding privacy while using the Application, please contact us via email at: bigmecoprog@gmail.com
