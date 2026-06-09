@@ -83,6 +83,7 @@ img{max-width:100%;display:block}
   box-shadow:var(--shadow);background:#0a0d0a;
 }
 .hero .banner img{width:100%}
+.hero .banner svg{display:block;width:100%;height:auto}
 .rec{
   display:inline-flex;align-items:center;gap:9px;margin:26px 0 4px;
   font-family:"JetBrains Mono",monospace;font-size:13px;letter-spacing:2px;color:var(--muted);
@@ -252,9 +253,41 @@ footer .mark{font-family:"Oswald";font-weight:600;letter-spacing:2px;color:var(-
 footer .q{color:var(--muted);font-style:italic}
 footer .links{margin:18px 0 0;display:flex;gap:18px;justify-content:center;flex-wrap:wrap;font-family:"JetBrains Mono";font-size:13px}
 
+/* ---------- LANGUAGE SWITCHER (ручной выбор поверх авто-детекта) ---------- */
+.lang{position:fixed;top:14px;right:14px;z-index:10000;font-family:"JetBrains Mono",monospace}
+.lang-btn{
+  display:inline-flex;align-items:center;gap:8px;cursor:pointer;
+  background:rgba(10,13,10,.82);border:1px solid var(--line-strong);border-radius:8px;
+  color:var(--ink);font-size:12px;letter-spacing:1px;padding:8px 11px;backdrop-filter:blur(4px);
+  transition:.16s
+}
+.lang-btn:hover{border-color:var(--acid);color:var(--acid-bright)}
+.lang-btn .globe{color:var(--acid)}
+.lang-btn .car{font-size:9px;opacity:.7;transition:transform .18s}
+.lang.open .lang-btn .car{transform:rotate(180deg)}
+.lang-menu{
+  position:absolute;top:calc(100% + 7px);right:0;min-width:172px;max-height:70vh;overflow:auto;
+  background:rgba(8,11,8,.96);border:1px solid var(--line-strong);border-radius:10px;
+  box-shadow:var(--shadow);padding:6px;backdrop-filter:blur(6px);
+  opacity:0;visibility:hidden;transform:translateY(-6px);transition:.16s
+}
+.lang.open .lang-menu{opacity:1;visibility:visible;transform:translateY(0)}
+.lang-opt{
+  display:flex;align-items:center;gap:9px;width:100%;text-align:left;cursor:pointer;
+  background:none;border:0;color:var(--muted);font-family:inherit;font-size:13px;letter-spacing:.4px;
+  padding:8px 10px;border-radius:6px;transition:.12s
+}
+.lang-opt:hover{background:rgba(195,214,58,.10);color:var(--ink)}
+.lang-opt .code{font-size:10px;color:var(--faint);margin-left:auto;letter-spacing:1px}
+.lang-opt.active{color:var(--acid-bright)}
+.lang-opt.active .code{color:var(--acid-dim)}
+.lang-opt.active::before{content:"▸";color:var(--acid)}
+.lang-opt:not(.active)::before{content:"";width:7px}
+
 @media(max-width:860px){
   .phases,.steps{grid-template-columns:1fr}
   .req{grid-template-columns:1fr}
+  .lang-btn .cur{display:none}
 }
 </style>
 </head>
@@ -264,7 +297,58 @@ footer .links{margin:18px 0 0;display:flex;gap:18px;justify-content:center;flex-
 <header class="hero hud">
   <div class="wrap">
     <a class="banner" href="https://github.com/bigmeco/NECHTO" aria-label="НЕЧТО — Протокол заражения">
-      <img src="assets/banner.svg" alt="НЕЧТО — ПРОТОКОЛ ЗАРАЖЕНИЯ">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 380" font-family="'Trebuchet MS','Segoe UI',Verdana,sans-serif" role="img" aria-label="НЕЧТО — ПРОТОКОЛ ЗАРАЖЕНИЯ">
+        <defs>
+          <radialGradient id="bg" cx="62%" cy="46%" r="75%"><stop offset="0%" stop-color="#141811"/><stop offset="55%" stop-color="#0a0d0a"/><stop offset="100%" stop-color="#050706"/></radialGradient>
+          <radialGradient id="hal" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#fff7a8"/><stop offset="16%" stop-color="#ffd400"/><stop offset="40%" stop-color="#ff3a18"/><stop offset="74%" stop-color="#7a0a05"/><stop offset="100%" stop-color="#1a0303"/></radialGradient>
+          <radialGradient id="halGlow" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#ff2412" stop-opacity="0.55"/><stop offset="100%" stop-color="#ff2412" stop-opacity="0"/></radialGradient>
+          <radialGradient id="vig" cx="50%" cy="42%" r="72%"><stop offset="55%" stop-color="#000" stop-opacity="0"/><stop offset="100%" stop-color="#000" stop-opacity="0.7"/></radialGradient>
+          <pattern id="scan" width="4" height="4" patternUnits="userSpaceOnUse"><rect width="4" height="4" fill="none"/><rect width="4" height="1" y="0" fill="#ffffff" opacity="0.04"/></pattern>
+          <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M60 0 H0 V60" fill="none" stroke="#2a3320" stroke-width="0.6" opacity="0.5"/></pattern>
+          <linearGradient id="sweep" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#c3d63a" stop-opacity="0"/><stop offset="50%" stop-color="#c3d63a" stop-opacity="0.16"/><stop offset="100%" stop-color="#c3d63a" stop-opacity="0"/></linearGradient>
+        </defs>
+        <rect width="1200" height="380" fill="url(#bg)"/>
+        <rect width="1200" height="380" fill="url(#grid)"/>
+        <g>
+          <circle cx="985" cy="178" r="150" fill="url(#halGlow)">
+            <animate attributeName="r" values="150; 185; 150; 150" keyTimes="0; 0.067; 0.133; 1" dur="30s" repeatCount="indefinite" calcMode="linear"/>
+            <animate attributeName="opacity" values="1; 0.7; 1; 1" keyTimes="0; 0.067; 0.133; 1" dur="30s" repeatCount="indefinite" calcMode="linear"/>
+          </circle>
+          <circle cx="985" cy="178" r="108" fill="#0a0608" stroke="#1c1010" stroke-width="2"/>
+          <circle cx="985" cy="178" r="96" fill="#000" stroke="#5a1c14" stroke-width="1"/>
+          <circle cx="985" cy="178" r="82" fill="url(#hal)"/>
+          <g fill="none" stroke="#3a0a05" stroke-width="2.4" opacity="0.8" stroke-linecap="round">
+            <path d="M965 138 q7 20 -3 42 q-11 22 6 42"/><path d="M1007 140 q-8 24 6 42 q11 16 -6 38"/><path d="M985 124 q12 30 0 54 q-11 18 6 44"/>
+          </g>
+          <circle cx="985" cy="178" r="19" fill="#1a0000"/>
+          <circle cx="978" cy="171" r="6" fill="#fff5cc" opacity="0.9"/>
+          <g fill="#3a1a14"><circle cx="918" cy="118" r="2.6"/><circle cx="1052" cy="118" r="2.6"/><circle cx="918" cy="238" r="2.6"/><circle cx="1052" cy="238" r="2.6"/></g>
+          <text x="985" y="300" text-anchor="middle" font-family="monospace" font-size="10" letter-spacing="5" fill="#7a1208">PRESENCE DETECTED</text>
+        </g>
+        <g>
+          <text x="74" y="92" font-family="monospace" font-size="15" letter-spacing="7" fill="#c3d63a" opacity="0.92">// LOCAL CO-OP HORROR · v.dev</text>
+          <g>
+            <text id="bnWord" x="70" y="222" font-size="138" font-weight="900" letter-spacing="6" fill="#efe6ce">НЕЧТО</text>
+            <text id="bnWordGlitch" x="70" y="222" font-size="138" font-weight="900" letter-spacing="6" fill="none" stroke="#ff2412" stroke-width="0.6" opacity="0">НЕЧТО<animate attributeName="opacity" values="0; 0; 0.85; 0; 0.5; 0; 0" keyTimes="0; 0.733; 0.740; 0.750; 0.757; 0.767; 1" dur="30s" repeatCount="indefinite" calcMode="linear"/></text>
+          </g>
+          <text x="74" y="272" font-size="29" font-weight="700" letter-spacing="9" fill="#9aab30"><tspan fill="#ff6b1a">— </tspan><tspan id="bnSub">ПРОТОКОЛ ЗАРАЖЕНИЯ</tspan></text>
+          <g font-family="monospace" font-size="14" letter-spacing="3" fill="#6a6a5e">
+            <circle cx="80" cy="326" r="5" fill="#ff2412"><animate attributeName="opacity" values="1; 1; 0.1; 0.1; 1" keyTimes="0; 0.38; 0.50; 0.62; 1" dur="1.6s" repeatCount="indefinite" calcMode="linear"/></circle>
+            <text x="94" y="331" fill="#ff2412">REC</text>
+            <text x="146" y="331">BIOSIGNATURES 8 +?</text>
+            <text x="420" y="331" fill="#3f4a34">·</text>
+            <text x="446" y="331">NOSTROMO 180924609</text>
+          </g>
+        </g>
+        <rect x="0" y="-70" width="1200" height="70" fill="url(#sweep)"><animate attributeName="y" values="-70; -70; 380; -70; -70" keyTimes="0; 0.333; 0.433; 0.434; 1" dur="30s" repeatCount="indefinite" calcMode="linear"/></rect>
+        <rect x="0" y="0" width="1200" height="2" fill="#dfe6a8" opacity="0.5"/>
+        <rect width="1200" height="380" fill="url(#scan)"/>
+        <rect width="1200" height="380" fill="url(#vig)"/>
+        <g stroke="#c3d63a" stroke-width="2" fill="none" opacity="0.7">
+          <path d="M24 52 V24 H52"/><path d="M1148 24 H1176 V52"/><path d="M24 328 V356 H52"/><path d="M1148 356 H1176 V328"/>
+        </g>
+        <rect x="14" y="14" width="1172" height="352" fill="none" stroke="#1f261a" stroke-width="1"/>
+      </svg>
     </a>
 
     <div class="rec"><span class="dot"></span> <span data-i18n="heroRec">REC · БОРТОВОЙ ЖУРНАЛ · СЕАНС ОТКРЫТ</span></div>
@@ -491,54 +575,130 @@ document.querySelectorAll('.yt').forEach(function(el){
 
 <script src="i18n.js"></script>
 <script>
-// Мультиязычность: язык берём из браузера (navigator.languages), без UI-переключателя.
-// RU — дефолт в самом HTML (его же видят краулеры и no-JS). Для остальных языков
-// подменяем тексты из словаря NECHTO_I18N (карты — из переводов самой игры).
+// Мультиязычность. Язык по умолчанию берётся из браузера (navigator.languages) —
+// без действий пользователя. Дополнительно есть РУЧНОЙ переключатель (выбор сохраняется
+// в localStorage и имеет приоритет). RU — дефолт прямо в HTML (no-JS / краулеры);
+// он же служит снимком-оригиналом, к которому возвращаемся при выборе русского.
+// Тексты карт — из переводов самой игры (i18n.js).
 (function(){
   var I18N = window.NECHTO_I18N || {};
+  var KEY = 'nechto_lang';
+  // Самоназвания языков для меню (порядок = порядок в меню)
+  var NAMES = [
+    ['ru','Русский'],['en','English'],['es','Español'],['de','Deutsch'],['fr','Français'],
+    ['pt-br','Português'],['pl','Polski'],['tr','Türkçe'],['zh-cn','中文'],['ja','日本語'],['ko','한국어']
+  ];
   function norm(l){
     if (!l) return null; l = l.toLowerCase();
-    if (I18N[l]) return l;                    // точное совпадение: zh-cn, pt-br, ...
+    if (I18N[l]) return l;
     var b = l.split('-')[0];
     if (b==='zh' && I18N['zh-cn']) return 'zh-cn';
     if (b==='pt' && I18N['pt-br']) return 'pt-br';
-    if (I18N[b]) return b;                    // en-US -> en, de-AT -> de, ...
+    if (I18N[b]) return b;
     return null;
   }
-  function pick(){
-    // Необязательный override ?lang=xx — это не UI-переключатель, а прямые ссылки и проверка.
+  function detect(){
     try{ var q = norm((new URLSearchParams(location.search)).get('lang')); if (q) return q; }catch(e){}
+    var stored = null; try{ stored = norm(localStorage.getItem(KEY)); }catch(e){}
+    if (stored) return stored;
     var ls = (navigator.languages && navigator.languages.length) ? navigator.languages : [navigator.language || 'en'];
     for (var i=0;i<ls.length;i++){ var m = norm(ls[i]); if (m) return m; }
-    return 'en';                              // не-русский дефолт = English
+    return 'en'; // не-русский дефолт = English
   }
-  var lang = pick();
-  if (lang === 'ru') return;                 // страница уже на русском — ничего не трогаем
-  var t = I18N[lang]; if (!t) return;
   var strip = function(s){ return (s||'').replace(/<[^>]+>/g,''); };
-  document.documentElement.lang = lang;
-  if (t.htmlTitle) document.title = t.htmlTitle;
-  var md = document.querySelector('meta[name="description"]'); if (md && t.metaDesc) md.setAttribute('content', t.metaDesc);
-  var ot = document.querySelector('meta[property="og:title"]'); if (ot && t.htmlTitle) ot.setAttribute('content', t.htmlTitle);
-  var od = document.querySelector('meta[property="og:description"]'); if (od && t.heroTag) od.setAttribute('content', strip(t.heroTag));
-  // прозовые элементы
-  document.querySelectorAll('[data-i18n]').forEach(function(el){
-    var k = el.getAttribute('data-i18n');
-    if (k === 'footMark'){ el.innerHTML = (t.title||'') + ' — ' + (t.sub||''); return; }
-    if (t[k] != null) el.innerHTML = t[k];
+  function $(s){ return document.querySelector(s); }
+
+  // ── снимок оригинала (русская версия как в HTML) ───────────────────────────
+  var proseEls = [].slice.call(document.querySelectorAll('[data-i18n]'));
+  var snapProse = proseEls.map(function(el){ return el.innerHTML; });
+  var cardEls = [].slice.call(document.querySelectorAll('.gcard[data-key]'));
+  function parts(el){ return { tg:el.querySelector('.tag'), h:el.querySelector('h4'), p:el.querySelector('p'), q:el.querySelector('.q') }; }
+  var snapCards = cardEls.map(function(el){ var p=parts(el);
+    return { tg:p.tg&&p.tg.textContent, h:p.h&&p.h.innerHTML, p:p.p&&p.p.innerHTML, q:p.q&&p.q.textContent }; });
+  var bn = { w:$('#bnWord'), g:$('#bnWordGlitch'), s:$('#bnSub') };
+  var snapBn = { w:bn.w&&bn.w.textContent, g:bn.g&&bn.g.firstChild&&bn.g.firstChild.nodeValue, s:bn.s&&bn.s.textContent };
+  var snapBadge = []; [].forEach.call(document.querySelectorAll('[data-badge]'), function(el){ snapBadge.push([el, el.getAttribute('data-badge')]); });
+  var snapTitle = document.title;
+  var snapDesc = ($('meta[name="description"]')||{}).content;
+  var snapOgT = (function(m){return m&&m.content;})($('meta[property="og:title"]'));
+  var snapOgD = (function(m){return m&&m.content;})($('meta[property="og:description"]'));
+
+  function restoreRu(){
+    document.documentElement.lang = 'ru';
+    document.title = snapTitle;
+    var md=$('meta[name="description"]'); if(md) md.content = snapDesc;
+    var ot=$('meta[property="og:title"]'); if(ot) ot.content = snapOgT;
+    var od=$('meta[property="og:description"]'); if(od) od.content = snapOgD;
+    proseEls.forEach(function(el,i){ el.innerHTML = snapProse[i]; });
+    cardEls.forEach(function(el,i){ var p=parts(el), s=snapCards[i];
+      if(p.tg) p.tg.textContent=s.tg; if(p.h) p.h.innerHTML=s.h; if(p.p) p.p.innerHTML=s.p; if(p.q) p.q.textContent=s.q; });
+    if(bn.w) bn.w.textContent = snapBn.w;
+    if(bn.g&&bn.g.firstChild) bn.g.firstChild.nodeValue = snapBn.g;
+    if(bn.s) bn.s.textContent = snapBn.s;
+    snapBadge.forEach(function(pair){ pair[0].setAttribute('data-badge', pair[1]); });
+  }
+
+  function applyLang(lang){
+    if (lang === 'ru'){ restoreRu(); return; }
+    var t = I18N[lang]; if (!t){ restoreRu(); return; }
+    document.documentElement.lang = lang;
+    if (t.htmlTitle) document.title = t.htmlTitle;
+    var md=$('meta[name="description"]'); if(md && t.metaDesc) md.content = t.metaDesc;
+    var ot=$('meta[property="og:title"]'); if(ot && t.htmlTitle) ot.content = t.htmlTitle;
+    var od=$('meta[property="og:description"]'); if(od && t.heroTag) od.content = strip(t.heroTag);
+    proseEls.forEach(function(el){
+      var k = el.getAttribute('data-i18n');
+      if (k === 'footMark'){ el.innerHTML = (t.title||'') + ' — ' + (t.sub||''); return; }
+      if (t[k] != null) el.innerHTML = t[k];
+    });
+    if (t.featBadge) snapBadge.forEach(function(pair){ pair[0].setAttribute('data-badge', t.featBadge); });
+    // баннер-логотип: заголовок + подзаголовок (сохраняем SMIL-анимацию глитча)
+    if (bn.w && t.title) bn.w.textContent = t.title;
+    if (bn.g && bn.g.firstChild && t.title) bn.g.firstChild.nodeValue = t.title;
+    if (bn.s && t.sub) bn.s.textContent = t.sub;
+    var C = t.cards || {};
+    cardEls.forEach(function(el){
+      var c = C[el.getAttribute('data-key')]; if (!c) return;
+      var tagk = el.getAttribute('data-tag'), p = parts(el);
+      if (p.tg && t[tagk]!=null) p.tg.textContent = t[tagk];
+      if (p.h && c.n) p.h.textContent = c.n;
+      if (p.p && c.d) p.p.textContent = c.d;
+      if (p.q && c.f) p.q.textContent = c.f;
+    });
+  }
+
+  // ── переключатель языка (строится скриптом; для no-JS его просто нет) ───────
+  var current = detect();
+  applyLang(current);
+
+  var nameOf = {}; NAMES.forEach(function(n){ nameOf[n[0]] = n[1]; });
+  var box = document.createElement('div'); box.className = 'lang';
+  var btn = document.createElement('button'); btn.className = 'lang-btn'; btn.type = 'button';
+  btn.setAttribute('aria-haspopup','true'); btn.setAttribute('aria-expanded','false');
+  btn.innerHTML = '<span class="globe">🌐</span><span class="cur"></span><span class="car">▼</span>';
+  var menu = document.createElement('div'); menu.className = 'lang-menu'; menu.setAttribute('role','menu');
+  NAMES.forEach(function(n){
+    var o = document.createElement('button'); o.className = 'lang-opt'; o.type = 'button'; o.setAttribute('role','menuitem');
+    o.dataset.lang = n[0];
+    o.innerHTML = '<span class="nm">'+n[1]+'</span><span class="code">'+n[0].toUpperCase()+'</span>';
+    o.addEventListener('click', function(){ choose(n[0]); });
+    menu.appendChild(o);
   });
-  // плашка «РЕКОМЕНДУЕМ» (CSS content:attr(data-badge))
-  if (t.featBadge){ document.querySelectorAll('[data-badge]').forEach(function(el){ el.setAttribute('data-badge', t.featBadge); }); }
-  // карты — имя/описание/флейвор/метка из словаря
-  var C = t.cards || {};
-  document.querySelectorAll('.gcard[data-key]').forEach(function(el){
-    var c = C[el.getAttribute('data-key')]; if (!c) return;
-    var tagk = el.getAttribute('data-tag');
-    var tg = el.querySelector('.tag'); if (tg && t[tagk] != null) tg.textContent = t[tagk];
-    var h = el.querySelector('h4');    if (h && c.n) h.textContent = c.n;
-    var p = el.querySelector('p');     if (p && c.d) p.textContent = c.d;
-    var q = el.querySelector('.q');    if (q && c.f) q.textContent = c.f;
-  });
+  box.appendChild(btn); box.appendChild(menu); document.body.appendChild(box);
+
+  function refresh(){
+    btn.querySelector('.cur').textContent = nameOf[current] || current.toUpperCase();
+    [].forEach.call(menu.children, function(o){ o.classList.toggle('active', o.dataset.lang === current); });
+  }
+  function open(v){ box.classList.toggle('open', v); btn.setAttribute('aria-expanded', v?'true':'false'); }
+  function choose(lang){
+    current = lang; try{ localStorage.setItem(KEY, lang); }catch(e){}
+    applyLang(lang); refresh(); open(false);
+  }
+  btn.addEventListener('click', function(e){ e.stopPropagation(); open(!box.classList.contains('open')); });
+  document.addEventListener('click', function(e){ if(!box.contains(e.target)) open(false); });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') open(false); });
+  refresh();
 })();
 </script>
 
