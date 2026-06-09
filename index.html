@@ -1,0 +1,446 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>НЕЧТО — Протокол заражения</title>
+<meta name="description" content="Локальный цифровой симулятор настольной игры «Нечто» в стиле Jackbox. Хост на ТВ / Android TV / планшете — игроки подключаются с телефонов по QR-коду. 4–12 игроков, Wi-Fi, без регистрации.">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="НЕЧТО — Протокол заражения">
+<meta property="og:description" content="Один экран на стене, телефоны как пульты. Найди заражённого, пока корабль ещё дышит.">
+<meta property="og:image" content="assets/style.png">
+<meta property="og:url" content="https://bigmeco.github.io/NECHTO/">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#070b07;
+  --bg2:#0a0f09;
+  --panel:#0d140c;
+  --panel2:#111a0f;
+  --ink:#eae3cf;
+  --muted:#8b9178;
+  --faint:#5d6450;
+  --acid:#c3d63a;
+  --acid-dim:#9aab30;
+  --acid-bright:#dff064;
+  --red:#ff2412;
+  --orange:#ff6b1a;
+  --amber:#ffd400;
+  --line:rgba(195,214,58,.18);
+  --line-strong:rgba(195,214,58,.34);
+  --shadow:0 18px 50px rgba(0,0,0,.55);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Oswald","Segoe UI",sans-serif;font-weight:300;font-size:17px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;letter-spacing:.2px;
+  background-image:
+    radial-gradient(60% 50% at 62% 8%, rgba(195,214,58,.05), transparent 60%),
+    radial-gradient(50% 40% at 20% 90%, rgba(255,36,18,.05), transparent 60%);
+}
+/* CRT scanlines + vignette over the whole page */
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;
+  background:repeating-linear-gradient(0deg, rgba(255,255,255,.025) 0 1px, transparent 1px 4px);
+  mix-blend-mode:overlay;opacity:.5;
+}
+body::after{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:9998;
+  background:radial-gradient(70% 60% at 50% 40%, transparent 55%, rgba(0,0,0,.6) 100%);
+}
+a{color:var(--acid);text-decoration:none}
+a:hover{color:var(--acid-bright)}
+img{max-width:100%;display:block}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+
+.mono{font-family:"JetBrains Mono",monospace}
+.kicker{
+  font-family:"JetBrains Mono",monospace;font-size:12px;font-weight:500;letter-spacing:3px;
+  text-transform:uppercase;color:var(--acid-dim);
+}
+
+/* ---------- HUD frame helper ---------- */
+.hud{position:relative}
+.hud::before,.hud::after{
+  content:"";position:absolute;width:26px;height:26px;pointer-events:none;
+  border:2px solid var(--line-strong);
+}
+.hud::before{top:10px;left:10px;border-right:0;border-bottom:0}
+.hud::after{bottom:10px;right:10px;border-left:0;border-top:0}
+
+/* ---------- HERO ---------- */
+.hero{position:relative;padding:46px 0 34px;text-align:center}
+.hero .banner{
+  border:1px solid var(--line);border-radius:14px;overflow:hidden;
+  box-shadow:var(--shadow);background:#0a0d0a;
+}
+.hero .banner img{width:100%}
+.rec{
+  display:inline-flex;align-items:center;gap:9px;margin:26px 0 4px;
+  font-family:"JetBrains Mono",monospace;font-size:13px;letter-spacing:2px;color:var(--muted);
+}
+.rec .dot{width:9px;height:9px;border-radius:50%;background:var(--red);box-shadow:0 0 10px var(--red);animation:blink 1.4s steps(1) infinite}
+@keyframes blink{50%{opacity:.2}}
+.tagline{font-size:clamp(20px,3vw,30px);font-weight:500;margin:14px auto 6px;max-width:760px;color:var(--ink)}
+.tagline b{color:var(--acid)}
+.subtag{color:var(--muted);max-width:640px;margin:0 auto;font-size:16px}
+
+.badges{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:26px 0 8px}
+.badge{
+  display:inline-flex;font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:700;
+  letter-spacing:.8px;border-radius:5px;overflow:hidden;border:1px solid rgba(255,255,255,.06)
+}
+.badge .l{background:#0a0d0a;color:#cfd6c4;padding:7px 10px}
+.badge .r{padding:7px 10px;color:#0a0d0a;font-weight:700}
+
+.cta{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin:30px 0 6px}
+.btn{
+  display:inline-flex;align-items:center;gap:10px;padding:13px 22px;border-radius:9px;
+  font-family:"Oswald",sans-serif;font-weight:600;font-size:16px;letter-spacing:1px;text-transform:uppercase;
+  border:1px solid var(--line-strong);color:var(--ink);background:linear-gradient(180deg,var(--panel2),var(--panel));
+  transition:.18s;cursor:pointer
+}
+.btn:hover{transform:translateY(-2px);color:var(--ink)}
+.btn.primary{
+  background:linear-gradient(180deg,#cfe24a,#a9bd2c);color:#0a0d0a;border-color:#cfe24a;
+  box-shadow:0 0 0 1px rgba(195,214,58,.4),0 14px 34px rgba(195,214,58,.18)
+}
+.btn.primary:hover{box-shadow:0 0 0 1px #dff064,0 16px 40px rgba(195,214,58,.3);color:#0a0d0a}
+.btn .ic{font-size:18px}
+
+/* ---------- SECTION ---------- */
+section{padding:54px 0;border-top:1px solid var(--line)}
+.sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:8px}
+.sec-head h2{
+  font-family:"Oswald",sans-serif;font-weight:600;font-size:clamp(24px,3.4vw,38px);
+  letter-spacing:1.5px;text-transform:uppercase;margin:0;color:var(--ink)
+}
+.sec-head h2 .gt{color:var(--acid)}
+.sec-sub{color:var(--muted);margin:2px 0 28px;max-width:760px}
+
+/* media block */
+.media{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#0a0d0a;box-shadow:var(--shadow)}
+.media img{width:100%}
+.cap{margin-top:12px;color:var(--faint);font-family:"JetBrains Mono",monospace;font-size:12.5px;letter-spacing:.4px;text-align:center}
+.cap code{color:var(--acid-dim)}
+
+/* ---------- PHASES ---------- */
+.phases{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.phase{
+  position:relative;border:1px solid var(--line);border-radius:12px;padding:26px 22px 24px;
+  background:linear-gradient(180deg,var(--panel2),var(--panel));overflow:hidden
+}
+.phase .n{
+  font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:2px;color:var(--acid-dim);
+  border:1px solid var(--line);border-radius:5px;padding:4px 9px;display:inline-block;margin-bottom:14px
+}
+.phase h3{font-family:"Oswald";font-weight:600;font-size:21px;letter-spacing:1px;text-transform:uppercase;margin:0 0 8px;color:var(--acid)}
+.phase p{margin:0;color:var(--muted);font-size:15.5px}
+.phase .glyph{position:absolute;right:-10px;bottom:-22px;font-size:96px;opacity:.06;color:var(--acid)}
+.ship-note{
+  margin-top:22px;border-left:3px solid var(--red);background:rgba(255,36,18,.05);
+  padding:14px 18px;border-radius:0 8px 8px 0;color:var(--ink)
+}
+.ship-note b{color:var(--red)}
+
+/* ---------- DOWNLOAD GRID ---------- */
+.dl-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.dl{
+  position:relative;border:1px solid var(--line);border-radius:12px;padding:22px;
+  background:linear-gradient(180deg,var(--panel2),var(--panel));transition:.18s;display:flex;flex-direction:column;gap:6px
+}
+.dl:hover{transform:translateY(-3px);border-color:var(--line-strong)}
+.dl .plat{display:flex;align-items:center;gap:10px;font-family:"Oswald";font-weight:600;font-size:19px;letter-spacing:.5px}
+.dl .plat .em{font-size:24px}
+.dl .meta{color:var(--faint);font-family:"JetBrains Mono";font-size:12px;letter-spacing:.5px;margin-bottom:6px}
+.dl a.go{margin-top:auto;align-self:flex-start;color:var(--acid);font-weight:500;font-family:"JetBrains Mono";font-size:13px;letter-spacing:.5px}
+.dl.feature{
+  border-color:var(--line-strong);
+  background:linear-gradient(180deg,rgba(195,214,58,.10),var(--panel));
+  box-shadow:0 0 0 1px rgba(195,214,58,.15)
+}
+.dl.feature::after{
+  content:"РЕКОМЕНДУЕМ";position:absolute;top:14px;right:14px;
+  font-family:"JetBrains Mono";font-size:9.5px;letter-spacing:1.5px;color:#0a0d0a;
+  background:var(--acid);padding:3px 7px;border-radius:4px;font-weight:700
+}
+.host-note{
+  margin-top:24px;border:1px dashed var(--line-strong);border-radius:10px;padding:16px 20px;
+  color:var(--muted);font-size:15px;background:rgba(195,214,58,.03)
+}
+.host-note b{color:var(--acid)}
+
+/* ---------- CARD CATALOG ---------- */
+.tabs{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:26px}
+.tab{
+  font-family:"JetBrains Mono";font-size:12px;letter-spacing:1.5px;text-transform:uppercase;
+  padding:7px 14px;border-radius:30px;border:1px solid var(--line);color:var(--muted)
+}
+.tab .d{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:7px;vertical-align:middle}
+.t-act .d{background:var(--orange)} .t-def .d{background:var(--acid)} .t-pan .d{background:#b061ff}
+
+.deck{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;margin-top:8px}
+.gcard{
+  position:relative;border:1px solid var(--line);border-radius:11px;padding:16px 16px 15px;
+  background:linear-gradient(180deg,var(--panel2),var(--panel));overflow:hidden;
+  border-top-width:3px;transition:.16s
+}
+.gcard:hover{transform:translateY(-3px) scale(1.01);border-color:var(--line-strong)}
+.gcard.act{border-top-color:var(--orange)}
+.gcard.def{border-top-color:var(--acid)}
+.gcard.pan{border-top-color:#b061ff}
+.gcard .tag{
+  font-family:"JetBrains Mono";font-size:9.5px;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--faint);margin-bottom:7px;display:block
+}
+.gcard h4{font-family:"Oswald";font-weight:600;font-size:17px;letter-spacing:.6px;text-transform:uppercase;margin:0 0 7px;color:var(--ink)}
+.gcard.act h4{color:#ffb27a}
+.gcard.def h4{color:var(--acid-bright)}
+.gcard.pan h4{color:#cda4ff}
+.gcard p{margin:0 0 9px;color:var(--muted);font-size:14px;line-height:1.5}
+.gcard .q{display:block;color:var(--faint);font-size:12.5px;font-style:italic;border-top:1px solid var(--line);padding-top:8px}
+.note{margin:22px 0 0;border-left:3px solid var(--acid);background:rgba(195,214,58,.05);padding:13px 18px;border-radius:0 8px 8px 0;color:var(--ink);font-size:15px}
+.note.warn{border-left-color:#b061ff;background:rgba(176,97,255,.06)}
+.note.warn b{color:#cda4ff}
+
+/* ---------- PLAY / REQ ---------- */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;counter-reset:s}
+.step{border:1px solid var(--line);border-radius:12px;padding:24px 22px;background:linear-gradient(180deg,var(--panel2),var(--panel));position:relative}
+.step .num{font-family:"JetBrains Mono";font-weight:700;font-size:34px;color:var(--orange);line-height:1;opacity:.9}
+.step p{margin:12px 0 0;color:var(--muted);font-size:15.5px}
+.step b{color:var(--ink)}
+
+.req{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px}
+.req .r{border:1px solid var(--line);border-radius:10px;padding:18px 20px;background:var(--panel)}
+.req .r .h{font-family:"Oswald";font-weight:600;font-size:16px;letter-spacing:.5px;color:var(--acid);margin-bottom:6px}
+.req .r p{margin:0;color:var(--muted);font-size:14.5px}
+
+/* ---------- FOOTER ---------- */
+footer{border-top:1px solid var(--line);padding:42px 0 60px;text-align:center}
+footer .style-img{border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-bottom:30px;box-shadow:var(--shadow)}
+footer .sys{font-family:"JetBrains Mono";font-size:12px;letter-spacing:1px;color:var(--faint)}
+footer .sys code{color:var(--acid-dim)}
+footer .mark{font-family:"Oswald";font-weight:600;letter-spacing:2px;color:var(--ink);margin:12px 0 6px;font-size:18px}
+footer .q{color:var(--muted);font-style:italic}
+footer .links{margin:18px 0 0;display:flex;gap:18px;justify-content:center;flex-wrap:wrap;font-family:"JetBrains Mono";font-size:13px}
+
+@media(max-width:860px){
+  .phases,.steps{grid-template-columns:1fr}
+  .req{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- ================= HERO ================= -->
+<header class="hero hud">
+  <div class="wrap">
+    <a class="banner" href="https://github.com/bigmeco/NECHTO" aria-label="НЕЧТО — Протокол заражения">
+      <img src="assets/banner.svg" alt="НЕЧТО — ПРОТОКОЛ ЗАРАЖЕНИЯ">
+    </a>
+
+    <div class="rec"><span class="dot"></span> REC · БОРТОВОЙ ЖУРНАЛ · СЕАНС ОТКРЫТ</div>
+    <p class="tagline">Один экран на стене, телефоны — как пульты. <b>Найди заражённого</b>, пока корабль ещё дышит.</p>
+    <p class="subtag">Локальный цифровой симулятор настольной игры в стиле Jackbox. Экипаж из восьми. Биосигнатур — восемь. Плюс ещё одна, которой не должно быть.</p>
+
+    <div class="badges">
+      <span class="badge"><span class="l">СТАТУС</span><span class="r" style="background:#ff2412;color:#fff">dev</span></span>
+      <span class="badge"><span class="l">GOOGLE PLAY</span><span class="r" style="background:#c3d63a">планшет / TV</span></span>
+      <span class="badge"><span class="l">ИГРОКОВ</span><span class="r" style="background:#c3d63a">4–12</span></span>
+      <span class="badge"><span class="l">СЕТЬ</span><span class="r" style="background:#ff6b1a">Wi-Fi LAN</span></span>
+      <span class="badge"><span class="l">РЕГИСТРАЦИЯ</span><span class="r" style="background:#9aab30">не нужна</span></span>
+      <span class="badge"><span class="l">ЛИЦЕНЗИЯ</span><span class="r" style="background:#6a6a5e;color:#fff">MIT</span></span>
+    </div>
+
+    <div class="cta">
+      <a class="btn primary" href="https://play.google.com/store/apps/details?id=org.bigmeco.nechto.host"><span class="ic">▶</span> Google Play · планшет / TV</a>
+      <a class="btn" href="https://github.com/bigmeco/NECHTO/releases/tag/dev"><span class="ic">⤓</span> Desktop · Releases</a>
+      <a class="btn" href="#карты"><span class="ic">◆</span> Колода</a>
+    </div>
+  </div>
+</header>
+
+<!-- ================= LIVE GAME ================= -->
+<section id="геймплей">
+  <div class="wrap">
+    <div class="sec-head"><span class="kicker">// сигнал с борта</span></div>
+    <div class="sec-head"><h2><span class="gt">▸</span> Живая партия</h2></div>
+    <p class="sec-sub">Реальная партия за одним столом: ноутбук или Android-хост на общем экране — и телефоны игроков.</p>
+    <div class="media">
+      <img src="assets/gameplay.gif" loading="lazy" alt="НЕЧТО — живая партия за одним столом">
+    </div>
+    <div class="cap"><code>:hostCore</code> · общий стол — то, что видят все. Секреты остаются в телефонах.</div>
+  </div>
+</section>
+
+<!-- ================= PHASES ================= -->
+<section id="фазы">
+  <div class="wrap">
+    <div class="sec-head"><span class="kicker">// протокол хода</span></div>
+    <div class="sec-head"><h2><span class="gt">▸</span> Фазы хода</h2></div>
+    <p class="sec-sub">Каждый ход — три обязательных фазы. Пропустить нельзя ни одну — корабль не позволит.</p>
+    <div class="phases">
+      <div class="phase">
+        <span class="n">ФАЗА 1</span>
+        <h3>Тянет карту</h3>
+        <p>Берёшь верхнюю карту из колоды. Если попалась карта <b>ПАНИКИ</b> — она разыгрывается немедленно.</p>
+        <span class="glyph">↧</span>
+      </div>
+      <div class="phase">
+        <span class="n">ФАЗА 2</span>
+        <h3>Играет</h3>
+        <p>Разыгрываешь одну карту действия — или сбрасываешь. Защитные карты здесь не играются, они реакция.</p>
+        <span class="glyph">◆</span>
+      </div>
+      <div class="phase">
+        <span class="n">ФАЗА 3</span>
+        <h3>Обменивается</h3>
+        <p>Передаёшь карту соседу. Он отбивается защитой — или принимает. Что пришло в руку — остаётся. Навсегда.</p>
+        <span class="glyph">⇄</span>
+      </div>
+    </div>
+    <div class="ship-note"><b>◆ Главное правило:</b> именно через обмен <b>Нечто</b> передаёт заражение. Каждый игрок становится соучастником, посредником или жертвой — иногда сам того не зная.</div>
+  </div>
+</section>
+
+<!-- ================= DOWNLOAD ================= -->
+<section id="скачать">
+  <div class="wrap">
+    <div class="sec-head"><span class="kicker">// дистрибуция</span></div>
+    <div class="sec-head"><h2><span class="gt">▸</span> Скачать хост</h2></div>
+    <p class="sec-sub">Хост — это «стол». Игрокам ставить ничего не нужно: они заходят с телефона по QR-коду.</p>
+    <div class="dl-grid">
+      <div class="dl feature">
+        <div class="plat"><span class="em">🤖</span> Android</div>
+        <div class="meta">ПЛАНШЕТ / ANDROID TV</div>
+        <a class="go" href="https://play.google.com/store/apps/details?id=org.bigmeco.nechto.host">Google Play →</a>
+      </div>
+      <div class="dl">
+        <div class="plat"><span class="em">🐧</span> Steam Deck / Linux</div>
+        <div class="meta">TAR.GZ + INSTALL.SH</div>
+        <a class="go" href="https://github.com/bigmeco/NECHTO/releases/tag/dev">Releases →</a>
+      </div>
+      <div class="dl">
+        <div class="plat"><span class="em">🍎</span> macOS</div>
+        <div class="meta">.DMG · APPLE SILICON / INTEL</div>
+        <a class="go" href="https://github.com/bigmeco/NECHTO/releases/tag/dev">Releases →</a>
+      </div>
+      <div class="dl">
+        <div class="plat"><span class="em">🪟</span> Windows</div>
+        <div class="meta">.MSI · .ZIP PORTABLE</div>
+        <a class="go" href="https://github.com/bigmeco/NECHTO/releases/tag/dev">Releases →</a>
+      </div>
+    </div>
+    <div class="host-note"><b>Android — это хост</b>, а не клиент. Планшет или Android TV-приставка заменяют ноутбук: поднимают тот же Ktor-сервер и выводят общий стол на большой экран. Игроки по-прежнему подключаются с телефонов через браузер по QR-коду — ставить приложение им не нужно.</div>
+  </div>
+</section>
+
+<!-- ================= CARDS ================= -->
+<section id="карты">
+  <div class="wrap">
+    <div class="sec-head"><span class="kicker">// бортовой арсенал</span></div>
+    <div class="sec-head"><h2><span class="gt">▸</span> Колода</h2></div>
+    <p class="sec-sub">Три типа карт. Действия играются в свой ход, защита — реакция на чужой, паника тянется вместо обычной карты и срабатывает сразу.</p>
+    <div class="tabs">
+      <span class="tab t-act"><span class="d"></span>Действия · 14</span>
+      <span class="tab t-def"><span class="d"></span>Защита · 5</span>
+      <span class="tab t-pan"><span class="d"></span>Паника · 12</span>
+    </div>
+
+    <!-- ДЕЙСТВИЯ -->
+    <h3 class="kicker" style="color:#ffb27a;margin:6px 0 14px">🟠 Действия — играются в фазе 2</h3>
+    <div class="deck">
+      <div class="gcard act"><span class="tag">действие</span><h4>Огнемёт</h4><p>Соседний игрок <b>выбывает</b> — если не ответит «Никакого шашлыка!». Ни карантин, ни дверь не спасут.</p><span class="q">«Клянусь, я сожгу любого, кто ко мне приблизится.»</span></div>
+      <div class="gcard act"><span class="tag">действие</span><h4>Карантин</h4><p>Изолирует соседа на <b>3 его хода</b>: не меняется, не играет действия, не цель. Снимается топором. Можно и на себя.</p><span class="q">«Пристёгнут. Кричать в кляп бесполезно.»</span></div>
+      <div class="gcard act"><span class="tag">действие</span><h4>Анализ</h4><p>Видишь <b>все</b> карты выбранного соседа. Только ты. Только сейчас.</p><span class="q">«…а теперь посмотрим, кто ты на самом деле.»</span></div>
+      <div class="gcard act"><span class="tag">действие</span><h4>Подозрение</h4><p>Видишь <b>одну</b> случайную карту соседа. Иногда этого достаточно.</p><span class="q">«Он сел левшой. С тех пор трижды взял кружку правой.»</span></div>
+      <div class="gcard act"><span class="tag">действие</span><h4>Заколоченная дверь</h4><p>Ставится <b>между тобой и соседом</b> — ни обменов, ни действий в эту сторону.</p><span class="q">«Сварено, забито, окрашено.»</span></div>
+      <div class="gcard act"><span class="tag">действие</span><h4>Топор</h4><p>Сносит дверь или снимает карантин с соседа. Одно применение — один удар.</p><span class="q">«Стекло аварийного шкафа уже было разбито до меня.»</span></div>
+      <div class="gcard act"><span class="tag">действие</span><h4>Соблазн</h4><p>Поменяйся 1 картой с <b>любым</b> игроком — не обязательно соседом. Ход заканчивается.</p><span class="q">«Капсула манит. Кажется, она тёплая. Кажется, она дышит.»</span></div>
+      <div class="gcard act"><span class="tag">действие</span><h4>Сматывай удочки!</h4><p>Поменяйся <b>местами</b> с любым игроком, игнорируя двери.</p><span class="q">«До капсулы 90 метров. У него — 92.»</span></div>
+      <div class="gcard act"><span class="tag">действие</span><h4>Меняемся местами!</h4><p>Поменяйся <b>местами</b> с соседним игроком, игнорируя двери.</p><span class="q">«Коридор одинаков с обоих концов. Или нет?»</span></div>
+      <div class="gcard act"><span class="tag">действие</span><h4>Что-то движется</h4><p>Меняет направление хода и обменов на противоположное.</p><span class="q">«Дальше по коридору двигается. Не быстро. Но точно к нам.»</span></div>
+      <div class="gcard act"><span class="tag">действие</span><h4>Виски</h4><p>Показываешь <b>все свои карты</b> всем игрокам. Только на себя.</p><span class="q">«В невесомости лёд не звенит. Стакан плывёт куда надо.»</span></div>
+      <div class="gcard act"><span class="tag">действие</span><h4>Упорство</h4><p>Возьми 3 карты, оставь 1, сбрось 2 — затем сыграй или сбрось ещё 1.</p><span class="q">«Кровь не моя. Точнее, не вся.»</span></div>
+      <div class="gcard act"><span class="tag">действие</span><h4>Старпом</h4><p>Посмотри карты на руке <b>любого</b> игрока — не только соседа.</p><span class="q">«Самый древний страх — страх неведомого.»</span></div>
+      <div class="gcard act"><span class="tag">действие</span><h4>Бортовой журнал</h4><p>Выбери <b>любого</b> игрока — он выбывает. Без права на защиту.</p><span class="q">«Запись 16: Запускаю последовательность самоуничтожения.»</span></div>
+    </div>
+
+    <!-- ЗАЩИТА -->
+    <h3 class="kicker" style="color:#dff064;margin:34px 0 14px">🟢 Защита — реакция на чужой ход</h3>
+    <div class="deck">
+      <div class="gcard def"><span class="tag">защита · обмен</span><h4>Нет уж, спасибо!</h4><p>Полный отказ от входящего обмена.</p><span class="q">«Из стакана растёт лоза. Не пью.»</span></div>
+      <div class="gcard def"><span class="tag">защита · обмен</span><h4>Мимо!</h4><p>Отказ — и обмен перекидывается к следующему игроку.</p><span class="q">«— Не сегодня, дорогуша.»</span></div>
+      <div class="gcard def"><span class="tag">защита · обмен</span><h4>Страх</h4><p>Отказ — и видишь карту, от которой отказался.</p><span class="q">«— Дайв! Открой шлюз! — …Дайв.»</span></div>
+      <div class="gcard def"><span class="tag">защита · перемещение</span><h4>Мне и здесь неплохо!</h4><p>Отменяет принудительное перемещение (Меняемся / Сматывай).</p><span class="q">«У меня кресло. У меня ствол на коленях. Я никуда.»</span></div>
+      <div class="gcard def"><span class="tag">защита · огнемёт</span><h4>Никакого шашлыка!</h4><p>Отменяет уничтожение огнемётом.</p><span class="q">«Костюм держит до 1200 °C.»</span></div>
+    </div>
+    <div class="note">◆ Защита не разыгрывается в свой ход — только как реакция. Каждая карта защиты приносит <b>+1 карту</b> из колоды в качестве компенсации.</div>
+
+    <!-- ПАНИКА -->
+    <h3 class="kicker" style="color:#cda4ff;margin:34px 0 14px">🟣 Паника — срабатывает немедленно</h3>
+    <div class="deck">
+      <div class="gcard pan"><span class="tag">паника</span><h4>Цепная реакция</h4><p><b>Все одновременно</b> передают по 1 карте следующему. Самая опасная — Нечто заражает сразу нескольких.</p><span class="q">«Сигнал прошёл по всей внутренней связи разом.»</span></div>
+      <div class="gcard pan"><span class="tag">паника</span><h4>Время признаний</h4><p>По очереди каждый показывает руку — или скрывает. Стоп, если раскрыто ЗАРАЖЕНИЕ.</p><span class="q">«Под лампой каждый — подозреваемый. Даже свет.»</span></div>
+      <div class="gcard pan"><span class="tag">паника</span><h4>Забывчивость</h4><p>Сбрось 3 карты → возьми 3 новые (паники при вытягивании сбрасываются).</p><span class="q">«Кажется, я заходил сюда. Кажется, у меня было имя.»</span></div>
+      <div class="gcard pan"><span class="tag">паника</span><h4>Свидание вслепую</h4><p>Поменяй 1 карту с руки на верхнюю карту колоды.</p><span class="q">«Аппарат выдаёт случайную судьбу. Возврату не подлежит.»</span></div>
+      <div class="gcard pan"><span class="tag">паника</span><h4>Давай дружить?</h4><p>Поменяйся 1 картой с любым игроком.</p><span class="q">«Перчатка тёплая. Слишком тёплая.»</span></div>
+      <div class="gcard pan"><span class="tag">паника</span><h4>Только между нами…</h4><p>Покажи всю руку выбранному соседу — только ему.</p><span class="q">«Шифрованный канал. Услышит только он. И тот, кем он стал.»</span></div>
+      <div class="gcard pan"><span class="tag">паника</span><h4>Уупс!</h4><p>Покажи всю руку <b>всем</b> игрокам.</p><span class="q">«Карты падают лицом вверх. Именно эта.»</span></div>
+      <div class="gcard pan"><span class="tag">паника</span><h4>…три, четыре…</h4><p>Все сыгранные ЗАКОЛОЧЕННЫЕ ДВЕРИ сбрасываются.</p><span class="q">«Доски ломаются с третьего удара. Со второго — если бить тем, что больше не человек.»</span></div>
+      <div class="gcard pan"><span class="tag">паника</span><h4>Старые верёвки</h4><p>Все сыгранные КАРАНТИНЫ сбрасываются.</p><span class="q">«Связали на скорую руку. Это быстро закончилось.»</span></div>
+      <div class="gcard pan"><span class="tag">паника</span><h4>И это вы называете вечеринкой?</h4><p>Все карантины и двери сброшены → все парами меняются местами по часовой.</p><span class="q">«Стробоскоп бьёт. Кто-то танцует. Кто-то — почти.»</span></div>
+      <div class="gcard pan"><span class="tag">паника</span><h4>Убирайся прочь!</h4><p>Поменяйся местами с любым игроком.</p><span class="q">«Шлюз сработает через 3 секунды. На скафандр времени нет.»</span></div>
+      <div class="gcard pan"><span class="tag">паника</span><h4>Раз, два…</h4><p>Поменяйся местами с третьим игроком слева или справа. Двери не работают.</p><span class="q">«Под решёткой пола что-то есть. Сегодня оно устало быть под.»</span></div>
+    </div>
+    <div class="note warn"><b>⚠ Паника</b> тянется из отдельной колоды вместо обычной карты. Разыгрывается немедленно — нельзя сбросить, придержать или защититься заранее. Паника не слушается карантина. Паника не знает дверей.</div>
+  </div>
+</section>
+
+<!-- ================= HOW TO PLAY ================= -->
+<section id="как-играть">
+  <div class="wrap">
+    <div class="sec-head"><span class="kicker">// инструктаж</span></div>
+    <div class="sec-head"><h2><span class="gt">▸</span> Как играть</h2></div>
+    <div class="steps">
+      <div class="step"><div class="num">01</div><p>Хост запускает приложение на <b>планшете, Android TV, ноутбуке или Steam Deck</b> — экран выводится на большой дисплей.</p></div>
+      <div class="step"><div class="num">02</div><p>Игроки сканируют <b>QR-код</b> на экране со своих телефонов <i>(Chrome / Firefox)</i>. Установка не нужна.</p></div>
+      <div class="step"><div class="num">03</div><p>Раздача, ходы, обмены — всё <b>с телефона</b>. Большой экран — общая память корабля, без секретов.</p></div>
+    </div>
+
+    <div class="sec-head" style="margin-top:44px"><h2><span class="gt">▸</span> Требования</h2></div>
+    <div class="req">
+      <div class="r"><div class="h">🖥️ Хост</div><p>планшет / Android TV / любой ноутбук / Steam Deck с Wi-Fi</p></div>
+      <div class="r"><div class="h">📱 Игроки</div><p>телефон с Chrome или Firefox <i>(Safari не поддерживается)</i></p></div>
+      <div class="r"><div class="h">📡 Сеть</div><p>общая Wi-Fi — корабль работает без выхода наружу</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap">
+    <div class="style-img"><img src="assets/style.png" loading="lazy" alt="НЕЧТО — стиль"></div>
+    <div class="sys"><code>MODULE :hostCore</code> · <code>SHARED STATE V3</code> · <code>CONN: SECURED</code></div>
+    <div class="mark">НЕЧТО — ПРОТОКОЛ ЗАРАЖЕНИЯ</div>
+    <div class="sys">© 2026 · MIT</div>
+    <div class="q">«Только не передавай мне ничего зелёного.»</div>
+    <div class="links">
+      <a href="https://github.com/bigmeco/NECHTO">GitHub</a>
+      <a href="https://github.com/bigmeco/NECHTO/releases/tag/dev">Releases</a>
+      <a href="https://play.google.com/store/apps/details?id=org.bigmeco.nechto.host">Google Play</a>
+      <a href="PRIVACY_POLICY.md">Конфиденциальность</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
