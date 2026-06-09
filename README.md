@@ -5,6 +5,7 @@
 <div align="center">
 
 [![статус](https://img.shields.io/badge/СТАТУС-dev-ff2412?style=for-the-badge&labelColor=0a0d0a)](https://github.com/bigmeco/NECHTO/releases/tag/dev)
+[![Google Play](https://img.shields.io/badge/GOOGLE%20PLAY-планшет%20%2F%20TV-c3d63a?style=for-the-badge&logo=googleplay&logoColor=c3d63a&labelColor=0a0d0a)](https://play.google.com/store/apps/details?id=org.bigmeco.nechto.host)
 [![игроков](https://img.shields.io/badge/ИГРОКОВ-4–12-c3d63a?style=for-the-badge&labelColor=0a0d0a)](#как-играть)
 [![сеть](https://img.shields.io/badge/СЕТЬ-Wi--Fi%20LAN-ff6b1a?style=for-the-badge&labelColor=0a0d0a)](#требования)
 [![регистрация](https://img.shields.io/badge/РЕГИСТРАЦИЯ-не%20нужна-9aab30?style=for-the-badge&labelColor=0a0d0a)](#как-играть)
@@ -118,10 +119,24 @@
 
 | Платформа | Файл |
 |:--|:--|
+| 🤖 **Android** — планшет / TV | [Google Play →](https://play.google.com/store/apps/details?id=org.bigmeco.nechto.host) |
 | 🐧 **Steam Deck / Linux** | [Releases →](https://github.com/bigmeco/NECHTO/releases/tag/dev) |
 | 🍎 **macOS** | [Releases →](https://github.com/bigmeco/NECHTO/releases/tag/dev) |
 | 🪟 **Windows** `.msi` | [Releases →](https://github.com/bigmeco/NECHTO/releases/tag/dev) |
 | 🪟 **Windows** `.zip` | [Releases →](https://github.com/bigmeco/NECHTO/releases/tag/dev) |
+
+> **Android — это хост**, а не клиент. Планшет или Android TV-приставка заменяют ноутбук: поднимают тот же Ktor-сервер и выводят общий стол на большой экран. Игроки по-прежнему подключаются с телефонов через браузер по QR-коду — ставить приложение им не нужно.
+
+---
+
+### Установка · Android (планшет / TV)
+
+1. Открыть [страницу в Google Play](https://play.google.com/store/apps/details?id=org.bigmeco.nechto.host) на планшете или Android TV
+2. Установить **NECHTO: Infection Protocol**
+3. Запустить — на планшете иконка в лаунчере, на Android TV карточка в строке приложений
+4. Игроки сканируют QR-код с экрана и заходят с телефонов — установка им не нужна
+
+> Доступно для **планшетов и Android TV**. Для телефонов приложение-хост не предназначено — телефон это клиент игрока (браузер).
 
 ---
 
