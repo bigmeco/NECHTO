@@ -188,7 +188,7 @@ section{padding:54px 0;border-top:1px solid var(--line)}
   box-shadow:0 0 0 1px rgba(195,214,58,.15)
 }
 .dl.feature::after{
-  content:"РЕКОМЕНДУЕМ";position:absolute;top:14px;right:14px;
+  content:attr(data-badge);position:absolute;top:14px;right:14px;
   font-family:"JetBrains Mono";font-size:9.5px;letter-spacing:1.5px;color:#0a0d0a;
   background:var(--acid);padding:3px 7px;border-radius:4px;font-weight:700
 }
@@ -267,24 +267,24 @@ footer .links{margin:18px 0 0;display:flex;gap:18px;justify-content:center;flex-
       <img src="assets/banner.svg" alt="НЕЧТО — ПРОТОКОЛ ЗАРАЖЕНИЯ">
     </a>
 
-    <div class="rec"><span class="dot"></span> REC · БОРТОВОЙ ЖУРНАЛ · СЕАНС ОТКРЫТ</div>
-    <p class="tagline">Один экран на стене, телефоны — как пульты. <b>Найди заражённого</b>, пока корабль ещё дышит.</p>
-    <p class="subtag">Локальный цифровой симулятор настольной игры в стиле Jackbox. Экипаж из восьми. Биосигнатур — восемь. Плюс ещё одна, которой не должно быть.</p>
+    <div class="rec"><span class="dot"></span> <span data-i18n="heroRec">REC · БОРТОВОЙ ЖУРНАЛ · СЕАНС ОТКРЫТ</span></div>
+    <p class="tagline" data-i18n="heroTag">Один экран на стене, телефоны — как пульты. <b>Найди заражённого</b>, пока корабль ещё дышит.</p>
+    <p class="subtag" data-i18n="heroSub">Локальный цифровой симулятор настольной игры в стиле Jackbox. Экипаж из восьми. Биосигнатур — восемь. Плюс ещё одна, которой не должно быть.</p>
 
     <div class="badges">
-      <span class="badge"><span class="l">СТАТУС</span><span class="r" style="background:#ff2412;color:#fff">dev</span></span>
-      <span class="badge"><span class="l">GOOGLE PLAY</span><span class="r" style="background:#c3d63a">планшет / TV</span></span>
-      <span class="badge"><span class="l">ИГРОКОВ</span><span class="r" style="background:#c3d63a">4–12</span></span>
-      <span class="badge"><span class="l">СЕТЬ</span><span class="r" style="background:#ff6b1a">Wi-Fi LAN</span></span>
-      <span class="badge"><span class="l">РЕГИСТРАЦИЯ</span><span class="r" style="background:#9aab30">не нужна</span></span>
-      <span class="badge"><span class="l">ЛИЦЕНЗИЯ</span><span class="r" style="background:#6a6a5e;color:#fff">MIT</span></span>
+      <span class="badge"><span class="l" data-i18n="bStatus">СТАТУС</span><span class="r" style="background:#ff2412;color:#fff">dev</span></span>
+      <span class="badge"><span class="l">GOOGLE PLAY</span><span class="r" style="background:#c3d63a" data-i18n="vPlayTV">планшет / TV</span></span>
+      <span class="badge"><span class="l" data-i18n="bPlayers">ИГРОКОВ</span><span class="r" style="background:#c3d63a">4–12</span></span>
+      <span class="badge"><span class="l" data-i18n="bNet">СЕТЬ</span><span class="r" style="background:#ff6b1a">Wi-Fi LAN</span></span>
+      <span class="badge"><span class="l" data-i18n="bReg">РЕГИСТРАЦИЯ</span><span class="r" style="background:#9aab30" data-i18n="vReg">не нужна</span></span>
+      <span class="badge"><span class="l" data-i18n="bLic">ЛИЦЕНЗИЯ</span><span class="r" style="background:#6a6a5e;color:#fff">MIT</span></span>
     </div>
 
     <div class="cta">
-      <a class="btn primary" href="https://play.google.com/store/apps/details?id=org.bigmeco.nechto.host"><span class="ic">▶</span> Google Play · планшет / TV</a>
+      <a class="btn primary" href="https://play.google.com/store/apps/details?id=org.bigmeco.nechto.host"><span class="ic">▶</span> <span data-i18n="ctaPlay">Google Play · планшет / TV</span></a>
       <a class="btn" href="https://github.com/bigmeco/NECHTO/releases/tag/dev"><span class="ic">⤓</span> Desktop · Releases</a>
-      <a class="btn" href="#геймплей"><span class="ic">▶</span> Геймплей</a>
-      <a class="btn" href="#карты"><span class="ic">◆</span> Колода</a>
+      <a class="btn" href="#геймплей"><span class="ic">▶</span> <span data-i18n="ctaGameplay">Геймплей</span></a>
+      <a class="btn" href="#карты"><span class="ic">◆</span> <span data-i18n="ctaDeck">Колода</span></a>
     </div>
   </div>
 </header>
@@ -292,9 +292,9 @@ footer .links{margin:18px 0 0;display:flex;gap:18px;justify-content:center;flex-
 <!-- ================= LIVE GAME ================= -->
 <section id="геймплей">
   <div class="wrap">
-    <div class="sec-head"><span class="kicker">// сигнал с борта</span></div>
-    <div class="sec-head"><h2><span class="gt">▸</span> Живая партия</h2></div>
-    <p class="sec-sub">Реальная партия за одним столом: ноутбук или Android-хост на общем экране — и телефоны игроков.</p>
+    <div class="sec-head"><span class="kicker" data-i18n="s1k">// сигнал с борта</span></div>
+    <div class="sec-head"><h2><span class="gt">▸</span> <span data-i18n="s1h">Живая партия</span></h2></div>
+    <p class="sec-sub" data-i18n="s1sub">Реальная партия за одним столом: ноутбук или Android-хост на общем экране — и телефоны игроков.</p>
     <div class="media">
       <div class="yt" data-id="E5NvOUEybE4" data-start="6" role="button" tabindex="0" aria-label="Смотреть геймплей НЕЧТО на YouTube">
         <img class="thumb" loading="lazy" alt="НЕЧТО — геймплей за одним столом"
@@ -302,53 +302,53 @@ footer .links{margin:18px 0 0;display:flex;gap:18px;justify-content:center;flex-
              onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/E5NvOUEybE4/hqdefault.jpg'">
         <div class="scrim"></div>
         <div class="play" aria-hidden="true"></div>
-        <span class="hudtag">▶ ЗАПИСЬ ПАРТИИ · YOUTUBE</span>
+        <span class="hudtag" data-i18n="ytTag">▶ ЗАПИСЬ ПАРТИИ · YOUTUBE</span>
       </div>
     </div>
-    <div class="cap"><code>:hostCore</code> · общий стол — то, что видят все. Секреты остаются в телефонах.</div>
+    <div class="cap"><code>:hostCore</code> · <span data-i18n="cap">общий стол — то, что видят все. Секреты остаются в телефонах.</span></div>
   </div>
 </section>
 
 <!-- ================= PHASES ================= -->
 <section id="фазы">
   <div class="wrap">
-    <div class="sec-head"><span class="kicker">// протокол хода</span></div>
-    <div class="sec-head"><h2><span class="gt">▸</span> Фазы хода</h2></div>
-    <p class="sec-sub">Каждый ход — три обязательных фазы. Пропустить нельзя ни одну — корабль не позволит.</p>
+    <div class="sec-head"><span class="kicker" data-i18n="s2k">// протокол хода</span></div>
+    <div class="sec-head"><h2><span class="gt">▸</span> <span data-i18n="s2h">Фазы хода</span></h2></div>
+    <p class="sec-sub" data-i18n="s2sub">Каждый ход — три обязательных фазы. Пропустить нельзя ни одну — корабль не позволит.</p>
     <div class="phases">
       <div class="phase">
-        <span class="n">ФАЗА 1</span>
-        <h3>Тянет карту</h3>
-        <p>Берёшь верхнюю карту из колоды. Если попалась карта <b>ПАНИКИ</b> — она разыгрывается немедленно.</p>
+        <span class="n" data-i18n="p1n">ФАЗА 1</span>
+        <h3 data-i18n="p1h">Тянет карту</h3>
+        <p data-i18n="p1p">Берёшь верхнюю карту из колоды. Если попалась карта <b>ПАНИКИ</b> — она разыгрывается немедленно.</p>
         <span class="glyph">↧</span>
       </div>
       <div class="phase">
-        <span class="n">ФАЗА 2</span>
-        <h3>Играет</h3>
-        <p>Разыгрываешь одну карту действия — или сбрасываешь. Защитные карты здесь не играются, они реакция.</p>
+        <span class="n" data-i18n="p2n">ФАЗА 2</span>
+        <h3 data-i18n="p2h">Играет</h3>
+        <p data-i18n="p2p">Разыгрываешь одну карту действия — или сбрасываешь. Защитные карты здесь не играются, они реакция.</p>
         <span class="glyph">◆</span>
       </div>
       <div class="phase">
-        <span class="n">ФАЗА 3</span>
-        <h3>Обменивается</h3>
-        <p>Передаёшь карту соседу. Он отбивается защитой — или принимает. Что пришло в руку — остаётся. Навсегда.</p>
+        <span class="n" data-i18n="p3n">ФАЗА 3</span>
+        <h3 data-i18n="p3h">Обменивается</h3>
+        <p data-i18n="p3p">Передаёшь карту соседу. Он отбивается защитой — или принимает. Что пришло в руку — остаётся. Навсегда.</p>
         <span class="glyph">⇄</span>
       </div>
     </div>
-    <div class="ship-note"><b>◆ Главное правило:</b> именно через обмен <b>Нечто</b> передаёт заражение. Каждый игрок становится соучастником, посредником или жертвой — иногда сам того не зная.</div>
+    <div class="ship-note" data-i18n="shipNote"><b>◆ Главное правило:</b> именно через обмен <b>Нечто</b> передаёт заражение. Каждый игрок становится соучастником, посредником или жертвой — иногда сам того не зная.</div>
   </div>
 </section>
 
 <!-- ================= DOWNLOAD ================= -->
 <section id="скачать">
   <div class="wrap">
-    <div class="sec-head"><span class="kicker">// дистрибуция</span></div>
-    <div class="sec-head"><h2><span class="gt">▸</span> Скачать хост</h2></div>
-    <p class="sec-sub">Хост — это «стол». Игрокам ставить ничего не нужно: они заходят с телефона по QR-коду.</p>
+    <div class="sec-head"><span class="kicker" data-i18n="s3k">// дистрибуция</span></div>
+    <div class="sec-head"><h2><span class="gt">▸</span> <span data-i18n="s3h">Скачать хост</span></h2></div>
+    <p class="sec-sub" data-i18n="s3sub">Хост — это «стол». Игрокам ставить ничего не нужно: они заходят с телефона по QR-коду.</p>
     <div class="dl-grid">
-      <div class="dl feature">
+      <div class="dl feature" data-badge="РЕКОМЕНДУЕМ">
         <div class="plat"><span class="em">🤖</span> Android</div>
-        <div class="meta">ПЛАНШЕТ / ANDROID TV</div>
+        <div class="meta" data-i18n="metaAndroid">ПЛАНШЕТ / ANDROID TV</div>
         <a class="go" href="https://play.google.com/store/apps/details?id=org.bigmeco.nechto.host">Google Play →</a>
       </div>
       <div class="dl">
@@ -367,88 +367,88 @@ footer .links{margin:18px 0 0;display:flex;gap:18px;justify-content:center;flex-
         <a class="go" href="https://github.com/bigmeco/NECHTO/releases/tag/dev">Releases →</a>
       </div>
     </div>
-    <div class="host-note"><b>Android — это хост</b>, а не клиент. Планшет или Android TV-приставка заменяют ноутбук: поднимают тот же Ktor-сервер и выводят общий стол на большой экран. Игроки по-прежнему подключаются с телефонов через браузер по QR-коду — ставить приложение им не нужно.</div>
+    <div class="host-note" data-i18n="hostNote"><b>Android — это хост</b>, а не клиент. Планшет или Android TV-приставка заменяют ноутбук: поднимают тот же Ktor-сервер и выводят общий стол на большой экран. Игроки по-прежнему подключаются с телефонов через браузер по QR-коду — ставить приложение им не нужно.</div>
   </div>
 </section>
 
 <!-- ================= CARDS ================= -->
 <section id="карты">
   <div class="wrap">
-    <div class="sec-head"><span class="kicker">// бортовой арсенал</span></div>
-    <div class="sec-head"><h2><span class="gt">▸</span> Колода</h2></div>
-    <p class="sec-sub">Три типа карт. Действия играются в свой ход, защита — реакция на чужой, паника тянется вместо обычной карты и срабатывает сразу.</p>
+    <div class="sec-head"><span class="kicker" data-i18n="s4k">// бортовой арсенал</span></div>
+    <div class="sec-head"><h2><span class="gt">▸</span> <span data-i18n="s4h">Колода</span></h2></div>
+    <p class="sec-sub" data-i18n="s4sub">Три типа карт. Действия играются в свой ход, защита — реакция на чужой, паника тянется вместо обычной карты и срабатывает сразу.</p>
     <div class="tabs">
-      <span class="tab t-act"><span class="d"></span>Действия · 14</span>
-      <span class="tab t-def"><span class="d"></span>Защита · 5</span>
-      <span class="tab t-pan"><span class="d"></span>Паника · 12</span>
+      <span class="tab t-act"><span class="d"></span><span data-i18n="tabAct">Действия · 14</span></span>
+      <span class="tab t-def"><span class="d"></span><span data-i18n="tabDef">Защита · 5</span></span>
+      <span class="tab t-pan"><span class="d"></span><span data-i18n="tabPan">Паника · 12</span></span>
     </div>
 
     <!-- ДЕЙСТВИЯ -->
-    <h3 class="kicker" style="color:#ffb27a;margin:6px 0 14px">🟠 Действия — играются в фазе 2</h3>
+    <h3 class="kicker" style="color:#ffb27a;margin:6px 0 14px" data-i18n="grpAct">🟠 Действия — играются в фазе 2</h3>
     <div class="deck">
-      <div class="gcard act"><span class="tag">действие</span><h4>Огнемёт</h4><p>Соседний игрок <b>выбывает</b> — если не ответит «Никакого шашлыка!». Ни карантин, ни дверь не спасут.</p><span class="q">«Клянусь, я сожгу любого, кто ко мне приблизится.»</span></div>
-      <div class="gcard act"><span class="tag">действие</span><h4>Карантин</h4><p>Изолирует соседа на <b>3 его хода</b>: не меняется, не играет действия, не цель. Снимается топором. Можно и на себя.</p><span class="q">«Пристёгнут. Кричать в кляп бесполезно.»</span></div>
-      <div class="gcard act"><span class="tag">действие</span><h4>Анализ</h4><p>Видишь <b>все</b> карты выбранного соседа. Только ты. Только сейчас.</p><span class="q">«…а теперь посмотрим, кто ты на самом деле.»</span></div>
-      <div class="gcard act"><span class="tag">действие</span><h4>Подозрение</h4><p>Видишь <b>одну</b> случайную карту соседа. Иногда этого достаточно.</p><span class="q">«Он сел левшой. С тех пор трижды взял кружку правой.»</span></div>
-      <div class="gcard act"><span class="tag">действие</span><h4>Заколоченная дверь</h4><p>Ставится <b>между тобой и соседом</b> — ни обменов, ни действий в эту сторону.</p><span class="q">«Сварено, забито, окрашено.»</span></div>
-      <div class="gcard act"><span class="tag">действие</span><h4>Топор</h4><p>Сносит дверь или снимает карантин с соседа. Одно применение — один удар.</p><span class="q">«Стекло аварийного шкафа уже было разбито до меня.»</span></div>
-      <div class="gcard act"><span class="tag">действие</span><h4>Соблазн</h4><p>Поменяйся 1 картой с <b>любым</b> игроком — не обязательно соседом. Ход заканчивается.</p><span class="q">«Капсула манит. Кажется, она тёплая. Кажется, она дышит.»</span></div>
-      <div class="gcard act"><span class="tag">действие</span><h4>Сматывай удочки!</h4><p>Поменяйся <b>местами</b> с любым игроком, игнорируя двери.</p><span class="q">«До капсулы 90 метров. У него — 92.»</span></div>
-      <div class="gcard act"><span class="tag">действие</span><h4>Меняемся местами!</h4><p>Поменяйся <b>местами</b> с соседним игроком, игнорируя двери.</p><span class="q">«Коридор одинаков с обоих концов. Или нет?»</span></div>
-      <div class="gcard act"><span class="tag">действие</span><h4>Что-то движется</h4><p>Меняет направление хода и обменов на противоположное.</p><span class="q">«Дальше по коридору двигается. Не быстро. Но точно к нам.»</span></div>
-      <div class="gcard act"><span class="tag">действие</span><h4>Виски</h4><p>Показываешь <b>все свои карты</b> всем игрокам. Только на себя.</p><span class="q">«В невесомости лёд не звенит. Стакан плывёт куда надо.»</span></div>
-      <div class="gcard act"><span class="tag">действие</span><h4>Упорство</h4><p>Возьми 3 карты, оставь 1, сбрось 2 — затем сыграй или сбрось ещё 1.</p><span class="q">«Кровь не моя. Точнее, не вся.»</span></div>
-      <div class="gcard act"><span class="tag">действие</span><h4>Старпом</h4><p>Посмотри карты на руке <b>любого</b> игрока — не только соседа.</p><span class="q">«Самый древний страх — страх неведомого.»</span></div>
-      <div class="gcard act"><span class="tag">действие</span><h4>Бортовой журнал</h4><p>Выбери <b>любого</b> игрока — он выбывает. Без права на защиту.</p><span class="q">«Запись 16: Запускаю последовательность самоуничтожения.»</span></div>
+      <div class="gcard act" data-key="FLAMETHROWER" data-tag="tagAct"><span class="tag">действие</span><h4>Огнемёт</h4><p>Соседний игрок <b>выбывает</b> — если не ответит «Никакого шашлыка!». Ни карантин, ни дверь не спасут.</p><span class="q">«Клянусь, я сожгу любого, кто ко мне приблизится.»</span></div>
+      <div class="gcard act" data-key="QUARANTINE" data-tag="tagAct"><span class="tag">действие</span><h4>Карантин</h4><p>Изолирует соседа на <b>3 его хода</b>: не меняется, не играет действия, не цель. Снимается топором. Можно и на себя.</p><span class="q">«Пристёгнут. Кричать в кляп бесполезно.»</span></div>
+      <div class="gcard act" data-key="ANALYSIS" data-tag="tagAct"><span class="tag">действие</span><h4>Анализ</h4><p>Видишь <b>все</b> карты выбранного соседа. Только ты. Только сейчас.</p><span class="q">«…а теперь посмотрим, кто ты на самом деле.»</span></div>
+      <div class="gcard act" data-key="SUSPICION" data-tag="tagAct"><span class="tag">действие</span><h4>Подозрение</h4><p>Видишь <b>одну</b> случайную карту соседа. Иногда этого достаточно.</p><span class="q">«Он сел левшой. С тех пор трижды взял кружку правой.»</span></div>
+      <div class="gcard act" data-key="BARRICADED_DOOR" data-tag="tagAct"><span class="tag">действие</span><h4>Заколоченная дверь</h4><p>Ставится <b>между тобой и соседом</b> — ни обменов, ни действий в эту сторону.</p><span class="q">«Сварено, забито, окрашено.»</span></div>
+      <div class="gcard act" data-key="AXE" data-tag="tagAct"><span class="tag">действие</span><h4>Топор</h4><p>Сносит дверь или снимает карантин с соседа. Одно применение — один удар.</p><span class="q">«Стекло аварийного шкафа уже было разбито до меня.»</span></div>
+      <div class="gcard act" data-key="TEMPTATION" data-tag="tagAct"><span class="tag">действие</span><h4>Соблазн</h4><p>Поменяйся 1 картой с <b>любым</b> игроком — не обязательно соседом. Ход заканчивается.</p><span class="q">«Капсула манит. Кажется, она тёплая. Кажется, она дышит.»</span></div>
+      <div class="gcard act" data-key="RUN_AWAY" data-tag="tagAct"><span class="tag">действие</span><h4>Сматывай удочки!</h4><p>Поменяйся <b>местами</b> с любым игроком, игнорируя двери.</p><span class="q">«До капсулы 90 метров. У него — 92.»</span></div>
+      <div class="gcard act" data-key="SWAP_PLACES" data-tag="tagAct"><span class="tag">действие</span><h4>Меняемся местами!</h4><p>Поменяйся <b>местами</b> с соседним игроком, игнорируя двери.</p><span class="q">«Коридор одинаков с обоих концов. Или нет?»</span></div>
+      <div class="gcard act" data-key="REVERSE" data-tag="tagAct"><span class="tag">действие</span><h4>Что-то движется</h4><p>Меняет направление хода и обменов на противоположное.</p><span class="q">«Дальше по коридору двигается. Не быстро. Но точно к нам.»</span></div>
+      <div class="gcard act" data-key="WHISKY" data-tag="tagAct"><span class="tag">действие</span><h4>Виски</h4><p>Показываешь <b>все свои карты</b> всем игрокам. Только на себя.</p><span class="q">«В невесомости лёд не звенит. Стакан плывёт куда надо.»</span></div>
+      <div class="gcard act" data-key="PERSISTENCE" data-tag="tagAct"><span class="tag">действие</span><h4>Упорство</h4><p>Возьми 3 карты, оставь 1, сбрось 2 — затем сыграй или сбрось ещё 1.</p><span class="q">«Кровь не моя. Точнее, не вся.»</span></div>
+      <div class="gcard act" data-key="LOVECRAFT" data-tag="tagAct"><span class="tag">действие</span><h4>Старпом</h4><p>Посмотри карты на руке <b>любого</b> игрока — не только соседа.</p><span class="q">«Самый древний страх — страх неведомого.»</span></div>
+      <div class="gcard act" data-key="NECRONOMICON" data-tag="tagAct"><span class="tag">действие</span><h4>Бортовой журнал</h4><p>Выбери <b>любого</b> игрока — он выбывает. Без права на защиту.</p><span class="q">«Запись 16: Запускаю последовательность самоуничтожения.»</span></div>
     </div>
 
     <!-- ЗАЩИТА -->
-    <h3 class="kicker" style="color:#dff064;margin:34px 0 14px">🟢 Защита — реакция на чужой ход</h3>
+    <h3 class="kicker" style="color:#dff064;margin:34px 0 14px" data-i18n="grpDef">🟢 Защита — реакция на чужой ход</h3>
     <div class="deck">
-      <div class="gcard def"><span class="tag">защита · обмен</span><h4>Нет уж, спасибо!</h4><p>Полный отказ от входящего обмена.</p><span class="q">«Из стакана растёт лоза. Не пью.»</span></div>
-      <div class="gcard def"><span class="tag">защита · обмен</span><h4>Мимо!</h4><p>Отказ — и обмен перекидывается к следующему игроку.</p><span class="q">«— Не сегодня, дорогуша.»</span></div>
-      <div class="gcard def"><span class="tag">защита · обмен</span><h4>Страх</h4><p>Отказ — и видишь карту, от которой отказался.</p><span class="q">«— Дайв! Открой шлюз! — …Дайв.»</span></div>
-      <div class="gcard def"><span class="tag">защита · перемещение</span><h4>Мне и здесь неплохо!</h4><p>Отменяет принудительное перемещение (Меняемся / Сматывай).</p><span class="q">«У меня кресло. У меня ствол на коленях. Я никуда.»</span></div>
-      <div class="gcard def"><span class="tag">защита · огнемёт</span><h4>Никакого шашлыка!</h4><p>Отменяет уничтожение огнемётом.</p><span class="q">«Костюм держит до 1200 °C.»</span></div>
+      <div class="gcard def" data-key="NO_THANKS" data-tag="tagDefEx"><span class="tag">защита · обмен</span><h4>Нет уж, спасибо!</h4><p>Полный отказ от входящего обмена.</p><span class="q">«Из стакана растёт лоза. Не пью.»</span></div>
+      <div class="gcard def" data-key="MISS" data-tag="tagDefEx"><span class="tag">защита · обмен</span><h4>Мимо!</h4><p>Отказ — и обмен перекидывается к следующему игроку.</p><span class="q">«— Не сегодня, дорогуша.»</span></div>
+      <div class="gcard def" data-key="FEAR" data-tag="tagDefEx"><span class="tag">защита · обмен</span><h4>Страх</h4><p>Отказ — и видишь карту, от которой отказался.</p><span class="q">«— Дайв! Открой шлюз! — …Дайв.»</span></div>
+      <div class="gcard def" data-key="STAY_HERE" data-tag="tagDefMove"><span class="tag">защита · перемещение</span><h4>Мне и здесь неплохо!</h4><p>Отменяет принудительное перемещение (Меняемся / Сматывай).</p><span class="q">«У меня кресло. У меня ствол на коленях. Я никуда.»</span></div>
+      <div class="gcard def" data-key="NO_BBQ" data-tag="tagDefFlame"><span class="tag">защита · огнемёт</span><h4>Никакого шашлыка!</h4><p>Отменяет уничтожение огнемётом.</p><span class="q">«Костюм держит до 1200 °C.»</span></div>
     </div>
-    <div class="note">◆ Защита не разыгрывается в свой ход — только как реакция. Каждая карта защиты приносит <b>+1 карту</b> из колоды в качестве компенсации.</div>
+    <div class="note" data-i18n="noteDef">◆ Защита не разыгрывается в свой ход — только как реакция. Каждая карта защиты приносит <b>+1 карту</b> из колоды в качестве компенсации.</div>
 
     <!-- ПАНИКА -->
-    <h3 class="kicker" style="color:#cda4ff;margin:34px 0 14px">🟣 Паника — срабатывает немедленно</h3>
+    <h3 class="kicker" style="color:#cda4ff;margin:34px 0 14px" data-i18n="grpPan">🟣 Паника — срабатывает немедленно</h3>
     <div class="deck">
-      <div class="gcard pan"><span class="tag">паника</span><h4>Цепная реакция</h4><p><b>Все одновременно</b> передают по 1 карте следующему. Самая опасная — Нечто заражает сразу нескольких.</p><span class="q">«Сигнал прошёл по всей внутренней связи разом.»</span></div>
-      <div class="gcard pan"><span class="tag">паника</span><h4>Время признаний</h4><p>По очереди каждый показывает руку — или скрывает. Стоп, если раскрыто ЗАРАЖЕНИЕ.</p><span class="q">«Под лампой каждый — подозреваемый. Даже свет.»</span></div>
-      <div class="gcard pan"><span class="tag">паника</span><h4>Забывчивость</h4><p>Сбрось 3 карты → возьми 3 новые (паники при вытягивании сбрасываются).</p><span class="q">«Кажется, я заходил сюда. Кажется, у меня было имя.»</span></div>
-      <div class="gcard pan"><span class="tag">паника</span><h4>Свидание вслепую</h4><p>Поменяй 1 карту с руки на верхнюю карту колоды.</p><span class="q">«Аппарат выдаёт случайную судьбу. Возврату не подлежит.»</span></div>
-      <div class="gcard pan"><span class="tag">паника</span><h4>Давай дружить?</h4><p>Поменяйся 1 картой с любым игроком.</p><span class="q">«Перчатка тёплая. Слишком тёплая.»</span></div>
-      <div class="gcard pan"><span class="tag">паника</span><h4>Только между нами…</h4><p>Покажи всю руку выбранному соседу — только ему.</p><span class="q">«Шифрованный канал. Услышит только он. И тот, кем он стал.»</span></div>
-      <div class="gcard pan"><span class="tag">паника</span><h4>Уупс!</h4><p>Покажи всю руку <b>всем</b> игрокам.</p><span class="q">«Карты падают лицом вверх. Именно эта.»</span></div>
-      <div class="gcard pan"><span class="tag">паника</span><h4>…три, четыре…</h4><p>Все сыгранные ЗАКОЛОЧЕННЫЕ ДВЕРИ сбрасываются.</p><span class="q">«Доски ломаются с третьего удара. Со второго — если бить тем, что больше не человек.»</span></div>
-      <div class="gcard pan"><span class="tag">паника</span><h4>Старые верёвки</h4><p>Все сыгранные КАРАНТИНЫ сбрасываются.</p><span class="q">«Связали на скорую руку. Это быстро закончилось.»</span></div>
-      <div class="gcard pan"><span class="tag">паника</span><h4>И это вы называете вечеринкой?</h4><p>Все карантины и двери сброшены → все парами меняются местами по часовой.</p><span class="q">«Стробоскоп бьёт. Кто-то танцует. Кто-то — почти.»</span></div>
-      <div class="gcard pan"><span class="tag">паника</span><h4>Убирайся прочь!</h4><p>Поменяйся местами с любым игроком.</p><span class="q">«Шлюз сработает через 3 секунды. На скафандр времени нет.»</span></div>
-      <div class="gcard pan"><span class="tag">паника</span><h4>Раз, два…</h4><p>Поменяйся местами с третьим игроком слева или справа. Двери не работают.</p><span class="q">«Под решёткой пола что-то есть. Сегодня оно устало быть под.»</span></div>
+      <div class="gcard pan" data-key="CHAIN_REACTION" data-tag="tagPan"><span class="tag">паника</span><h4>Цепная реакция</h4><p><b>Все одновременно</b> передают по 1 карте следующему. Самая опасная — Нечто заражает сразу нескольких.</p><span class="q">«Сигнал прошёл по всей внутренней связи разом.»</span></div>
+      <div class="gcard pan" data-key="CONFESSION_TIME" data-tag="tagPan"><span class="tag">паника</span><h4>Время признаний</h4><p>По очереди каждый показывает руку — или скрывает. Стоп, если раскрыто ЗАРАЖЕНИЕ.</p><span class="q">«Под лампой каждый — подозреваемый. Даже свет.»</span></div>
+      <div class="gcard pan" data-key="FORGETFULNESS" data-tag="tagPan"><span class="tag">паника</span><h4>Забывчивость</h4><p>Сбрось 3 карты → возьми 3 новые (паники при вытягивании сбрасываются).</p><span class="q">«Кажется, я заходил сюда. Кажется, у меня было имя.»</span></div>
+      <div class="gcard pan" data-key="BLIND_DATE" data-tag="tagPan"><span class="tag">паника</span><h4>Свидание вслепую</h4><p>Поменяй 1 карту с руки на верхнюю карту колоды.</p><span class="q">«Аппарат выдаёт случайную судьбу. Возврату не подлежит.»</span></div>
+      <div class="gcard pan" data-key="LETS_BE_FRIENDS" data-tag="tagPan"><span class="tag">паника</span><h4>Давай дружить?</h4><p>Поменяйся 1 картой с любым игроком.</p><span class="q">«Перчатка тёплая. Слишком тёплая.»</span></div>
+      <div class="gcard pan" data-key="JUST_BETWEEN_US" data-tag="tagPan"><span class="tag">паника</span><h4>Только между нами…</h4><p>Покажи всю руку выбранному соседу — только ему.</p><span class="q">«Шифрованный канал. Услышит только он. И тот, кем он стал.»</span></div>
+      <div class="gcard pan" data-key="OOPS" data-tag="tagPan"><span class="tag">паника</span><h4>Уупс!</h4><p>Покажи всю руку <b>всем</b> игрокам.</p><span class="q">«Карты падают лицом вверх. Именно эта.»</span></div>
+      <div class="gcard pan" data-key="THREE_FOUR" data-tag="tagPan"><span class="tag">паника</span><h4>…три, четыре…</h4><p>Все сыгранные ЗАКОЛОЧЕННЫЕ ДВЕРИ сбрасываются.</p><span class="q">«Доски ломаются с третьего удара. Со второго — если бить тем, что больше не человек.»</span></div>
+      <div class="gcard pan" data-key="OLD_ROPES" data-tag="tagPan"><span class="tag">паника</span><h4>Старые верёвки</h4><p>Все сыгранные КАРАНТИНЫ сбрасываются.</p><span class="q">«Связали на скорую руку. Это быстро закончилось.»</span></div>
+      <div class="gcard pan" data-key="WHAT_A_PARTY" data-tag="tagPan"><span class="tag">паника</span><h4>И это вы называете вечеринкой?</h4><p>Все карантины и двери сброшены → все парами меняются местами по часовой.</p><span class="q">«Стробоскоп бьёт. Кто-то танцует. Кто-то — почти.»</span></div>
+      <div class="gcard pan" data-key="GET_OUT" data-tag="tagPan"><span class="tag">паника</span><h4>Убирайся прочь!</h4><p>Поменяйся местами с любым игроком.</p><span class="q">«Шлюз сработает через 3 секунды. На скафандр времени нет.»</span></div>
+      <div class="gcard pan" data-key="ONE_TWO" data-tag="tagPan"><span class="tag">паника</span><h4>Раз, два…</h4><p>Поменяйся местами с третьим игроком слева или справа. Двери не работают.</p><span class="q">«Под решёткой пола что-то есть. Сегодня оно устало быть под.»</span></div>
     </div>
-    <div class="note warn"><b>⚠ Паника</b> тянется из отдельной колоды вместо обычной карты. Разыгрывается немедленно — нельзя сбросить, придержать или защититься заранее. Паника не слушается карантина. Паника не знает дверей.</div>
+    <div class="note warn" data-i18n="notePanic"><b>⚠ Паника</b> тянется из отдельной колоды вместо обычной карты. Разыгрывается немедленно — нельзя сбросить, придержать или защититься заранее. Паника не слушается карантина. Паника не знает дверей.</div>
   </div>
 </section>
 
 <!-- ================= HOW TO PLAY ================= -->
 <section id="как-играть">
   <div class="wrap">
-    <div class="sec-head"><span class="kicker">// инструктаж</span></div>
-    <div class="sec-head"><h2><span class="gt">▸</span> Как играть</h2></div>
+    <div class="sec-head"><span class="kicker" data-i18n="s5k">// инструктаж</span></div>
+    <div class="sec-head"><h2><span class="gt">▸</span> <span data-i18n="s5h">Как играть</span></h2></div>
     <div class="steps">
-      <div class="step"><div class="num">01</div><p>Хост запускает приложение на <b>планшете, Android TV, ноутбуке или Steam Deck</b> — экран выводится на большой дисплей.</p></div>
-      <div class="step"><div class="num">02</div><p>Игроки сканируют <b>QR-код</b> на экране со своих телефонов <i>(Chrome / Firefox)</i>. Установка не нужна.</p></div>
-      <div class="step"><div class="num">03</div><p>Раздача, ходы, обмены — всё <b>с телефона</b>. Большой экран — общая память корабля, без секретов.</p></div>
+      <div class="step"><div class="num">01</div><p data-i18n="step1">Хост запускает приложение на <b>планшете, Android TV, ноутбуке или Steam Deck</b> — экран выводится на большой дисплей.</p></div>
+      <div class="step"><div class="num">02</div><p data-i18n="step2">Игроки сканируют <b>QR-код</b> на экране со своих телефонов <i>(Chrome / Firefox)</i>. Установка не нужна.</p></div>
+      <div class="step"><div class="num">03</div><p data-i18n="step3">Раздача, ходы, обмены — всё <b>с телефона</b>. Большой экран — общая память корабля, без секретов.</p></div>
     </div>
 
-    <div class="sec-head" style="margin-top:44px"><h2><span class="gt">▸</span> Требования</h2></div>
+    <div class="sec-head" style="margin-top:44px"><h2><span class="gt">▸</span> <span data-i18n="reqH">Требования</span></h2></div>
     <div class="req">
-      <div class="r"><div class="h">🖥️ Хост</div><p>планшет / Android TV / любой ноутбук / Steam Deck с Wi-Fi</p></div>
-      <div class="r"><div class="h">📱 Игроки</div><p>телефон с Chrome или Firefox <i>(Safari не поддерживается)</i></p></div>
-      <div class="r"><div class="h">📡 Сеть</div><p>общая Wi-Fi — корабль работает без выхода наружу</p></div>
+      <div class="r"><div class="h" data-i18n="reqHostH">🖥️ Хост</div><p data-i18n="reqHostP">планшет / Android TV / любой ноутбук / Steam Deck с Wi-Fi</p></div>
+      <div class="r"><div class="h" data-i18n="reqPlayersH">📱 Игроки</div><p data-i18n="reqPlayersP">телефон с Chrome или Firefox <i>(Safari не поддерживается)</i></p></div>
+      <div class="r"><div class="h" data-i18n="reqNetH">📡 Сеть</div><p data-i18n="reqNetP">общая Wi-Fi — корабль работает без выхода наружу</p></div>
     </div>
   </div>
 </section>
@@ -458,14 +458,14 @@ footer .links{margin:18px 0 0;display:flex;gap:18px;justify-content:center;flex-
   <div class="wrap">
     <div class="style-img"><img src="assets/style.png" loading="lazy" alt="НЕЧТО — стиль"></div>
     <div class="sys"><code>MODULE :hostCore</code> · <code>SHARED STATE V3</code> · <code>CONN: SECURED</code></div>
-    <div class="mark">НЕЧТО — ПРОТОКОЛ ЗАРАЖЕНИЯ</div>
+    <div class="mark" data-i18n="footMark">НЕЧТО — ПРОТОКОЛ ЗАРАЖЕНИЯ</div>
     <div class="sys">© 2026 · MIT</div>
-    <div class="q">«Только не передавай мне ничего зелёного.»</div>
+    <div class="q" data-i18n="footQuote">«Только не передавай мне ничего зелёного.»</div>
     <div class="links">
       <a href="https://github.com/bigmeco/NECHTO">GitHub</a>
       <a href="https://github.com/bigmeco/NECHTO/releases/tag/dev">Releases</a>
       <a href="https://play.google.com/store/apps/details?id=org.bigmeco.nechto.host">Google Play</a>
-      <a href="PRIVACY_POLICY.md">Конфиденциальность</a>
+      <a href="PRIVACY_POLICY.md" data-i18n="lnkPrivacy">Конфиденциальность</a>
     </div>
   </div>
 </footer>
@@ -487,6 +487,59 @@ document.querySelectorAll('.yt').forEach(function(el){
   el.addEventListener('click', load);
   el.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); load(); }});
 });
+</script>
+
+<script src="i18n.js"></script>
+<script>
+// Мультиязычность: язык берём из браузера (navigator.languages), без UI-переключателя.
+// RU — дефолт в самом HTML (его же видят краулеры и no-JS). Для остальных языков
+// подменяем тексты из словаря NECHTO_I18N (карты — из переводов самой игры).
+(function(){
+  var I18N = window.NECHTO_I18N || {};
+  function norm(l){
+    if (!l) return null; l = l.toLowerCase();
+    if (I18N[l]) return l;                    // точное совпадение: zh-cn, pt-br, ...
+    var b = l.split('-')[0];
+    if (b==='zh' && I18N['zh-cn']) return 'zh-cn';
+    if (b==='pt' && I18N['pt-br']) return 'pt-br';
+    if (I18N[b]) return b;                    // en-US -> en, de-AT -> de, ...
+    return null;
+  }
+  function pick(){
+    // Необязательный override ?lang=xx — это не UI-переключатель, а прямые ссылки и проверка.
+    try{ var q = norm((new URLSearchParams(location.search)).get('lang')); if (q) return q; }catch(e){}
+    var ls = (navigator.languages && navigator.languages.length) ? navigator.languages : [navigator.language || 'en'];
+    for (var i=0;i<ls.length;i++){ var m = norm(ls[i]); if (m) return m; }
+    return 'en';                              // не-русский дефолт = English
+  }
+  var lang = pick();
+  if (lang === 'ru') return;                 // страница уже на русском — ничего не трогаем
+  var t = I18N[lang]; if (!t) return;
+  var strip = function(s){ return (s||'').replace(/<[^>]+>/g,''); };
+  document.documentElement.lang = lang;
+  if (t.htmlTitle) document.title = t.htmlTitle;
+  var md = document.querySelector('meta[name="description"]'); if (md && t.metaDesc) md.setAttribute('content', t.metaDesc);
+  var ot = document.querySelector('meta[property="og:title"]'); if (ot && t.htmlTitle) ot.setAttribute('content', t.htmlTitle);
+  var od = document.querySelector('meta[property="og:description"]'); if (od && t.heroTag) od.setAttribute('content', strip(t.heroTag));
+  // прозовые элементы
+  document.querySelectorAll('[data-i18n]').forEach(function(el){
+    var k = el.getAttribute('data-i18n');
+    if (k === 'footMark'){ el.innerHTML = (t.title||'') + ' — ' + (t.sub||''); return; }
+    if (t[k] != null) el.innerHTML = t[k];
+  });
+  // плашка «РЕКОМЕНДУЕМ» (CSS content:attr(data-badge))
+  if (t.featBadge){ document.querySelectorAll('[data-badge]').forEach(function(el){ el.setAttribute('data-badge', t.featBadge); }); }
+  // карты — имя/описание/флейвор/метка из словаря
+  var C = t.cards || {};
+  document.querySelectorAll('.gcard[data-key]').forEach(function(el){
+    var c = C[el.getAttribute('data-key')]; if (!c) return;
+    var tagk = el.getAttribute('data-tag');
+    var tg = el.querySelector('.tag'); if (tg && t[tagk] != null) tg.textContent = t[tagk];
+    var h = el.querySelector('h4');    if (h && c.n) h.textContent = c.n;
+    var p = el.querySelector('p');     if (p && c.d) p.textContent = c.d;
+    var q = el.querySelector('.q');    if (q && c.f) q.textContent = c.f;
+  });
+})();
 </script>
 
 </body>
