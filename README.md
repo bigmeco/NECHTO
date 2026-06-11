@@ -6,6 +6,7 @@
 
 [![статус](https://img.shields.io/badge/СТАТУС-dev-ff2412?style=for-the-badge&labelColor=0a0d0a)](https://github.com/bigmeco/NECHTO/releases/tag/dev)
 [![Google Play](https://img.shields.io/badge/GOOGLE%20PLAY-планшет%20%2F%20TV-c3d63a?style=for-the-badge&logo=googleplay&logoColor=c3d63a&labelColor=0a0d0a)](https://play.google.com/store/apps/details?id=org.bigmeco.nechto.host)
+[![Steam](https://img.shields.io/badge/STEAM-Desktop%20%2F%20Deck-c3d63a?style=for-the-badge&logo=steam&logoColor=c3d63a&labelColor=0a0d0a)](https://store.steampowered.com/app/4813130/NECHTO_Infection_Protocol)
 [![игроков](https://img.shields.io/badge/ИГРОКОВ-4–12-c3d63a?style=for-the-badge&labelColor=0a0d0a)](#как-играть)
 [![сеть](https://img.shields.io/badge/СЕТЬ-Wi--Fi%20LAN-ff6b1a?style=for-the-badge&labelColor=0a0d0a)](#требования)
 [![регистрация](https://img.shields.io/badge/РЕГИСТРАЦИЯ-не%20нужна-9aab30?style=for-the-badge&labelColor=0a0d0a)](#как-играть)
@@ -120,6 +121,7 @@
 | Платформа | Файл |
 |:--|:--|
 | 🤖 **Android** — планшет / TV | [Google Play →](https://play.google.com/store/apps/details?id=org.bigmeco.nechto.host) |
+| 🎮 **Steam** — Windows / macOS / Linux / Deck | [Steam →](https://store.steampowered.com/app/4813130/NECHTO_Infection_Protocol) |
 | 🐧 **Steam Deck / Linux** | [Releases →](https://github.com/bigmeco/NECHTO/releases/tag/dev) |
 | 🍎 **macOS** | [Releases →](https://github.com/bigmeco/NECHTO/releases/tag/dev) |
 | 🪟 **Windows** `.msi` | [Releases →](https://github.com/bigmeco/NECHTO/releases/tag/dev) |
